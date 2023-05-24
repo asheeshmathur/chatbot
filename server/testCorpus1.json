@@ -1,0 +1,83 @@
+{
+  "name": "intentMaster",
+  "locale": "en-US",
+  "data": [
+    {
+      "id": 1,
+      "intent": "coffee.drink",
+      "keywords": [
+        "coffee",
+        "latte",
+        "cafe",
+        "caffeine",
+        "cofee"
+      ],
+      "answers": [
+        "With sugar ",
+        "Wait will serve your drink"
+      ],
+      "tests": [
+        "what else is developing your enterprise",
+        "does your company have some other product?",
+        "what else have created your company?",
+        "does the enterprise have any other app?",
+        "Other product developed by your company?"
+      ]
+    }
+    ,
+    {
+      "id":2,
+      "intent": "tea.drink",
+      "keywords":[
+        "chai",
+        "kadak chai",
+        "tea",
+        "tee"
+      ],
+      "answers": [
+        "Wait will serve you Tea Without sugar ",
+        "Wait will serve you Tea "
+      ],
+      "tests":[]
+    },
+    {
+      "id":3,
+      "intent": "general",
+      "keywords":[
+      ],
+      "answers": [
+        "Unable to interpret, could you please repeat "
+      ],
+      "tests":[]
+    },
+    {
+      "id":4,
+      "intent": "choice",
+      "keywords":[
+      ],
+      "answers": [
+        "I am confused with multiple choices, Please rephrase the query"
+      ],
+      "tests":[]
+    },
+    {
+      "id":5,
+      "intent": "whatNext",
+      "keywords":[
+      ],
+      "answers": [
+        "Anything else for me "
+      ],
+      "tests":[]
+    },{
+      "id":6,
+      "intent": "invalidIntent",
+      "keywords":[
+      ],
+      "answers": [
+        "Please rephrase the query"
+      ],
+      "tests":[]
+    }
+  ]
+}

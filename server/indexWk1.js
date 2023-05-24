@@ -1,6 +1,5 @@
 // Import Corpus
 const Corpus = require("./Singleton.js");
-
 const IntentHistory = require("./IntentHistory.js");
 
 const express = require("express")
@@ -28,9 +27,6 @@ const socketIO = require('socket.io')(http, {
 });
 // Instantiate Corpus
 const myCorpus = new Corpus("./testCorpus1.json");
-
-// Set continuation Message
-const continuationMsg = "What Next , Please"
 //To keep track of all connected users
 let sockets = [];
 
@@ -63,9 +59,8 @@ socketIO.on('connection', (socket) => {
 
     socket.on("messageDisplay", data => {
         console.log("Socket to be responded: " + socket.id);
-        let replyto = socket.id;
         // Ping Back what user typed in
-        socketIO.to(replyto).emit("messageResponse",
+        socketIO.emit("messageResponse",
             {
                 text: data.text,
                 name: data.name,
@@ -76,32 +71,23 @@ socketIO.on('connection', (socket) => {
     }); //message display
 
     socket.on("message", data => {
-        let replyto = socket.id;
-        console.log("Socket to be responded: " + socket.id);
+        let replyto=socket.id;
+        console.log("Socket to be responded: "+socket.id);
         const extracted = myCorpus.extractIntentFromText(data.text);
         const dynamicMessage = myCorpus.randomAnswer(extracted);
 
         //Create an instance of Intent and Response
-        const intentHistory = new IntentHistory(data.text, extracted, dynamicMessage);
+        const intentHistory = new IntentHistory(data.text,extracted,dynamicMessage);
         let newArray = connectionsMap.get(socket.id);
         newArray.push(intentHistory)
         connectionsMap.set(socket.id, newArray)
         socketIO.to(replyto).emit('messageResponse',
-            {
-                text: dynamicMessage,
+            {text:dynamicMessage,
                 name: "AI Agent",
-                id: data.id,
-                socketIO: data.socketID
-            });
-        // Send continuation message
+                id:data.id,
+                socketIO:data.socketID});
 
     })
-    socket.on('disconnect', () => {
-        console.log('🔥: A user disconnected');
-        users = users.filter(user => user.socketID !== socket.id)
-        socketIO.emit("newUserResponse", users)
-        socket.disconnect()
-    });
 })
 http.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
