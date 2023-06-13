@@ -40,7 +40,7 @@ class Corpus {
                     this.corpus[i];
                 const normalisedText= this.normalize(recipeName);
                 const tempKeywords = this.tokenize(normalisedText);
-                this.intentAnswers.set(recipeName, recipeName+prepTime+cookingTime );
+                this.intentAnswers.set(recipeName, recipeName+" Preparation Time "+prepTime+" mins.  Cooking Time "+cookingTime+ "mins. Serves " +servings);
 
                 // Remove stop words from list as they do not add value
                 this.keywordList=tempKeywords.filter(function (item)
@@ -86,6 +86,12 @@ class Corpus {
             return !stopWords.includes(item);
         })
 
+    }
+
+    getIntentAnswers(key){
+        let details =""
+        details =this.intentAnswers.get(key)
+        return details;
     }
     // Get Recipe Name based on string, a collection of intents extracted from message
     extractRecipesFromText(rawText) {

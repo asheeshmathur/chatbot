@@ -70,15 +70,21 @@ socketIO.on('connection', (socket) => {
         const extracted = myCorpus.extractRecipesFromText(data.text);
         retAnswer="";
         if (extracted.size > 1) {
+            retAnswer= "There are "+extracted.size+ " Dishes Available "
+            i =1
             for (const value of extracted) {
-                retAnswer = retAnswer+" or "+value;
+                retAnswer = retAnswer+i+" "+value +".\n\n";
+                i++;
             }
+            retAnswer=retAnswer+" Please Select One of these";
 
         }
         else {
             const iterator1 = extracted.values();
 
-            retAnswer=iterator1.next().value
+            retAnswerOne=iterator1.next().value
+            retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
+            console.log(retAnswer)
         }
 
         //const dynamicMessage = myCorpus.randomAnswer(extracted);
