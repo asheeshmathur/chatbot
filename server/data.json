@@ -1,0 +1,1469 @@
+[
+    {
+        "recipeName":"Simple Macaroni and Cheese",
+        "recipeDescription": "Bring a large pot of lightly salted water to a boil. Cook elbow macaroni in the boiling water, stirring occasionally until cooked through but firm to the bite, 8 minutes. Drain. Melt butter in a saucepan over medium heat; stir in flour, salt, and pepper until smooth, about 5 minutes. Slowly pour milk into butter-flour mixture while continuously stirring until mixture is smooth and bubbling, about 5 minutes. Add Cheddar cheese to milk mixture and stir until cheese is melted, 2 to 4 minutes. Fold macaroni into cheese sauce until coated.",
+        "recipeCategory": "MAIN_DISH",
+        "difficulty": "EASY",
+        "recipeType": "DEFAULT",
+        "prepTime": 10,
+        "cookingTime": 20,
+        "servings": 4,
+        "image_link": "https://www.allrecipes.com/thmb/xI5g0WBP8yPHwRt1Nt5WudTctzE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/238691-Simple-Macaroni-And-Cheese-mfs_008-b32db5aa505041acbe958aedb81d29e9.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "elbow macaroni"    
+                },
+                "proportionValue": 8,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "butter"
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "milk"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "shredded cheddar cheese"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "cup"
+            }
+        ]
+    },
+    {
+        "recipeName":"Gourmet Mushroom Risotto",
+        "recipeDescription": "In a saucepan, warm the broth over low heat. Warm 2 tablespoons olive oil in a large saucepan over medium-high heat. Stir in the mushrooms, and cook until soft, about 3 minutes. Remove mushrooms and their liquid, and set aside. Add 1 tablespoon olive oil to skillet,  and stir in the shallots. Cook 1 minute. Add rice, stirring to coat with oil, about 2 minutes. When the rice has taken on a pale, golden color, pour in wine, stirring constantly until the wine is fully absorbed. Add 1/2 cup broth to the rice, and stir until the broth is absorbed. Continue adding broth 1/2 cup at a time, stirring continuously, until the liquid is absorbed and the rice is al dente, about 15 to 20 minutes. Remove from heat, and stir in mushrooms with their liquid, butter, chives, and parmesan. Season with salt and pepper to taste.",
+        "recipeCategory":"MAIN_DISH",
+        "difficulty": "MODERATE",
+        "recipeType": "RED_MEAT_FREE",
+        "prepTime": 20,
+        "cookingTime": 30,
+        "servings": 6,
+        "image_link": "https://www.allrecipes.com/thmb/854efwMYEwilYjKr0FiF4FkwBvM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/85389-gourmet-mushroom-risotto-DDMFS-4x3-a8a80a8deb064c6a8f15452b808a0258.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "chicken broth"    
+                },
+                "proportionValue": 6,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "olive oil"
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "thinly sliced portobello mushroom"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "pound"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "thinly sliced white mushroom"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "pound"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "shallot"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "diced"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "Arborio rice"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "dry white wine"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sea salt"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "freshly ground black pepper"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "finely chooped chives"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "butter"    
+                },
+                "proportionValue": 4,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "freshly grated Parmesan cheese"    
+                },
+                "proportionValue": 0.3,
+                "proportionUnit": "cup"
+            }
+        ]
+    },
+    {
+        "recipeName":"Dessert Crepes",
+        "recipeDescription": "In large bowl, whisk together eggs, milk, melted butter, flour sugar and salt until smooth. Heat a medium-sized skillet or crepe pan over medium heat. Grease pan with a small amount of butter or oil applied with a brush or paper towel.  Using a serving spoon or small ladle, spoon about 3 tablespoons crepe batter into hot pan, tilting the pan so that bottom surface is evenly coated.  Cook over medium heat, 1 to 2 minutes on a side, or until golden brown.  Serve immediately.",
+        "recipeCategory":"BREAKFAST_AND_BRUNCH",
+        "difficulty": "MODERATE",
+        "recipeType": "DEFAULT",
+        "prepTime": 10,
+        "cookingTime": 10,
+        "servings": 8,
+        "image_link": "https://www.allrecipes.com/thmb/RF9CTg83MdIy-RV8qyuLzUoxXZY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/4511555-dessert-crepes-Buckwheat-Queen-1x1-1-90b5c7ed132f47728b8a2fdc1c984dd0.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "lightly beaten eggs"    
+                },
+                "proportionValue": 4,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "milk"
+                },
+                "proportionValue": 1.3,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "melted butter"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "white sugar"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Chicken Parmesan",
+        "recipeDescription": "Preheat an oven to 450 degrees F (230 degrees C). Place chicken breasts between two sheets of heavy plastic (resealable freezer bags work well) on a solid, level surface. Firmly pound chicken with the smooth side of a meat mallet to a thickness of 1/2-inch. Season chicken thoroughly with salt and pepper. Beat eggs in a shallow bowl and set aside. Mix bread crumbs and 1/2 cup Parmesan cheese in a separate bowl, set aside. Place flour in a sifter or strainer; sprinkle over chicken breasts, evenly coating both sides. Dip flour coated chicken breast in beaten eggs. Transfer breast to breadcrumb mixture, pressing the crumbs into both sides. Repeat for each breast. Set aside breaded chicken breasts for about 15 minutes. Heat 1 cup olive oil in a large skillet on medium-high heat until it begins to shimmer. Cook chicken until golden, about 2 minutes on each side. The chicken will finish cooking in the oven. Place chicken in a baking dish and top each breast with about 1/3 cup of tomato sauce. Layer each chicken breast with equal amounts of mozzarella cheese, fresh basil, and provolone cheese. Sprinkle 1 to 2 tablespoons of Parmesan cheese on top and drizzle with 1 tablespoon olive oil. Bake in the preheated oven until cheese is browned and bubbly, and chicken breasts are no longer pink in the center, 15 to 20 minutes. An instant-read thermometer inserted into the center should read at least 165 degrees F (74 degrees C).",
+        "recipeCategory":"WORLD_CUISINE",
+        "difficulty": "HARD",
+        "recipeType": "RED_MEAT_FREE",
+        "prepTime": 25,
+        "cookingTime": 20,
+        "servings": 4,
+        "image_link": "https://www.allrecipes.com/thmb/J0U0wHxsY1r-I1JUJ5jXcwCnzRI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/223042-Chicken-Parmesan-mfs_001-7ab952346edc4b2da36f3c0259b78543.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "skinless, boneless, halves chicken breast"    
+                },
+                "proportionValue": 4,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "freshly ground black pepper"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "egg"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "panko bread crumbs"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated Parmesan cheese"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "olive oil"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "prepared tomato sauce"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "fresh mozzarella, cut into small cubes"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "freshly chopped basil"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated provolone cheese"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated Parmesan cheese"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "olive oil"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "tablespoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Basic Mashed Potatoes",
+        "recipeDescription": "Bring a pot of salted water to a boil.  Add potatoes and cook until tender but still firm, about 15 minutes; drain. In a small saucepan heat butter and milk over low heat until butter is melted.  Using a potato masher or electric beater, slowly blend milk mixture into potatoes until smooth and creamy.  Season with salt and pepper to taste.",
+        "recipeCategory":"SIDE_DISH",
+        "difficulty": "EASY",
+        "recipeType": "GLUTEN_FREE",
+        "prepTime": 15,
+        "cookingTime": 20,
+        "servings": 4,
+        "image_link": "https://www.allrecipes.com/thmb/8pkbFP258H24axyBlRbGtWS-Vnk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/24771-basic-mashed-potatoes-mfs318-ed832ab37551471cba0997410217d4c5.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "peeled and quartered baking potatoes"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "pound"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "butter"
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "milk"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "pepper"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Creamy Lemon Chicken Thighs",
+        "recipeDescription": "Preheat the oven to 400 degrees F (200 degrees C). Place chicken in a large bowl and coat generously with salt, pepper, and paprika. Heat butter in a large skillet over medium heat. Add chicken to the skillet in batches, skin-side down. Cook until skin is golden and crispy, about 2 minutes per batch. Remove chicken and place into a large baking dish. Add thyme and garlic to the skillet. Cook over medium heat until garlic is fragrant and lightly browned, about 1 minute. Whisk in flour slowly into a thick paste. Add wine, stock, lemon juice, and cream and bring to a simmer, about 5 minutes. Add Parmesan cheese and stir until melted. Pour sauce over chicken in the baking dish. Bake in the preheated oven, uncovered, until chicken is not longer pink inside and juices run clear, about 30 minutes.",
+        "recipeCategory":"Meat and Poultry",
+        "difficulty": "MODERATE",
+        "recipeType": "NO_SUGAR",
+        "prepTime": 15,
+        "cookingTime": 40,
+        "servings": 12,
+        "image_link": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F10%2F15%2F6505832-creamy-lemon-chicken-thighs-thedailygourmet-4x3-1.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "chicken thigh"    
+                },
+                "proportionValue": 6,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chicken drumstick"
+                },
+                "proportionValue": 6,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground paprika"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salted butter"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "fresh thyme leaves"    
+                },
+                "proportionValue": 4,
+                "proportionUnit": "sprigs"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "minced garlic"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "cloves"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "white wine"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chicken stock"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "lemon, juiced"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "heavy whipping cream"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated Parmesan cheese"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            }
+        ]
+    },
+    {
+        "recipeName":"Vegetarian Moussaka",
+        "recipeDescription": "Sprinkle eggplant slices with salt and set aside for 30 minutes.  Rinse and pat dry. Preheat oven to 375  degrees F (190 degrees C). Heat oil in a large skillet over medium-high heat.  Rinse and pat eggplant dry. Cook eggplant and zucchini in hot oil until lightly browned on both sides, about 3 minutes per side; remove with a slotted spoon to drain on a paper towel-lined plate, reserving as much oil as possible in the skillet Adding more oil to skillet as needed and let it get hot. Cook potato slices in hot oil until browned, 3 to 5 minutes per side; remove with slotted spoon and drain on a paper towel-lined plate, again reserving oil in the skillet. Saute onion and garlic in reserved oil until lightly browned, 5 to 7 minutes. Pour in vinegar, bring to a boil, and reduce heat to medium-low; cook until liquid is reduced in volume and thick. Stir in tomatoes, lentils, 1\/2 the juice from lentils, oregano and parsley.  Cover, reduce heat to medium-low, and simmer 15 minutes. Layer about 1\/3 of the eggplant, 1\/3 of the zucchini, 1\/2 the potatoes, 1\/2 the onions, and 1\/2 the feta into a 13x9-inch baking dish.  Pour tomato mixture over vegetables; repeat layering, finishing with a layer of eggplant and zucchini. Cover and bake in preheated oven for 25 minutes. Stir butter, flour, and milk together in a small saucepan; bring to a slow boil, whisking constantly until thick and smooth. Season with pepper and nutmeg; stir.  Remove from heat, cool for 5 minutes, and stir in beaten egg. Pour sauce over vegetables and sprinkle with Parmesan cheese. Bake, uncovered, for another 25 to 30 minutes.",
+        "recipeCategory":"WORLD_CUISINE",
+        "difficulty": "EASY",
+        "recipeType": "VEGETARIAN",
+        "prepTime": 30,
+        "cookingTime": 90,
+        "servings": 7,
+        "image_link": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F43%2F2022%2F10%2F15%2F6505832-creamy-lemon-chicken-thighs-thedailygourmet-4x3-1.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "thinly sliced eggplant"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "olive oil"
+                },
+                "proportionValue": 1,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "large thinly sliced zucchini"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "thinly sliced potatoes"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sliced onion"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped garlic"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "clove"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "white vinegar"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "can peeled chopped tomatoes"    
+                },
+                "proportionValue": 14.5,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "can drained with liquid reserved lentils"    
+                },
+                "proportionValue": 14.5,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "dried oregano"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped fresh parsley"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "crumbled feta cheese"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "butter"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "milk"    
+                },
+                "proportionValue": 1.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground nutmeg"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "pinch"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "beaten egg"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated Parmesan cheese"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            }
+        ]
+    },
+    {
+        "recipeName":"Instant Pot Chicken Pot Pie (crustless)",
+        "recipeDescription": "Combine chicken, broth, carrots, celery, corn, onion, salt, garlic powder, onion powder, black pepper, poultry seasoning, and thyme in a multi-functional pressure cooker (such as Instant Pot\u00ae). Close and lock the lid. Select high pressure according to manufacturer's instructions; set timer for 10 minutes. Allow 10 to 15 minutes for pressure to build. Release pressure using the natural-release method according to manufacturer's instructions, about 10 minutes. Release remaining pressure carefully using the quick-release method, about 10 minutes more. Unlock and remove lid. Stir in cream and peas. Select Saute function. Cook until thickened, 2 to 3 minutes.",
+        "recipeCategory":"MEAT_AND_POULTRY",
+        "difficulty": "MODERATE",
+        "recipeType": "WHEAT_FREE",
+        "prepTime": 20,
+        "cookingTime": 25,
+        "servings": 6,
+        "image_link": "https://www.allrecipes.com/thmb/_GjK1Uxn6Cu6JzSHs2NRnlw741Y=/1280x0/filters:no_upscale():max_bytes(150000):strip_icc()/image-33-aa4709f47fa949b19da8d09d35eda1b2.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "cubed chicken tenders"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "pound"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chicken broth"
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "diced carrots"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "diced celery"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "corn kernel"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "large diced onion"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "garlic powder"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "onion powder"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "poultry seasoning"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "dried thyme"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "heavy cream"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "frozen pea"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            }
+        ]
+    },
+    {
+        "recipeName":"Paleo and Vegan Sunflower Banana Muffins",
+        "recipeDescription": "Preheat oven to 400 degrees F (200 degrees C). Grease 6 muffin cups or line with paper liners. Stir water and flax seed meal together in a bowl and let thicken, about 5 minutes. Blend bananas in a blender until smooth. Transfer bananas to a bowl and stir in sunflower butter, coconut flour, maple syrup, vanilla extract, apple cider vinegar, and baking powder. Stir flax seed mixture into banana mixture until batter is thick. Spoon batter into prepared cups, filling to the top. Bake in preheated oven until brown, about 15 minutes.",
+        "recipeCategory":"BREAD",
+        "difficulty": "HARD",
+        "recipeType": "EGG_FREE",
+        "prepTime": 10,
+        "cookingTime": 15,
+        "servings": 6,
+        "image_link": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5500620.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "water"    
+                },
+                "proportionValue": 6,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "flax seed meal"
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "banana"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sunflower seed butter"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "coconut flour"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "pure maple syrup"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "vanilla extract"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "apple cider vinegar"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "baking soda"    
+                },
+                "proportionValue": 0.75,
+                "proportionUnit": "teaspoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Diabetic-Friendly Pork Stroganoff",
+        "recipeDescription": "Bring a large pot of water to a boil. Add penne and cook, stirring occasionally, until tender yet firm to the bite, about 11 minutes. Meanwhile, whisk 1\/2 cup broth, sour cream, flour, mustard, salt, thyme, and 1\/4 teaspoon pepper together in a small bowl. Heat 1 tablespoon oil in a large nonstick skillet over medium-high heat. Add pork; cook until browned on all sides, about 5 minutes. Transfer to a bowl. Drain pasta and keep warm. Heat remaining oil in a skillet over medium-high heat. Add mushrooms, broccoli, and onion. Cook, stirring occasionally, until vegetables are lightly browned and crisp-tender, 5 to 7 minutes. Return pork to the skillet. Add remaining broth. Bring mixture to a simmer. Reduce heat to medium. Stir sour cream mixture into the skillet. Cook, stirring frequently, until thickened and bubbly. Gently simmer until pork is cooked through and no longer pink in the center, about 2 minutes more. Serve pork mixture over pasta and sprinkle with parsley and additional black pepper.",
+        "recipeCategory":"PASTA_AND_NOODLES",
+        "difficulty": "MODERATE",
+        "recipeType": "DIABETIC",
+        "prepTime": 15,
+        "cookingTime": 35,
+        "servings": 6,
+        "image_link": "https://www.allrecipes.com/thmb/OCgPNIlbHiz6sBPPsLu1R3skdHE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/8597733-92dcc71885b64dd39aeac6d94b053ab7.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "whole-grain penne pasta"    
+                },
+                "proportionValue": 6,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "reduced-sodium beef broth"
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sour cream"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "Dijon mustard"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.75,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped fresh thyme"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "vegetable oil"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "pork tenderloin cut into 1-inch chunks"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "pound"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sliced fresh button mushroom"    
+                },
+                "proportionValue": 8,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "broccoli cut into bite-sized pieces"    
+                },
+                "proportionValue": 8,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sliced onion"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped fresh parsley"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Easy Tuna Patties",
+        "recipeDescription": "Beat eggs and lemon juice in a bowl; stir in Parmesan cheese and bread crumbs to make a paste. Fold in tuna and onion until well-mixed. Season with black pepper. Shape tuna mixture into eight 1-inch-thick patties. Heat vegetable oil in a skillet over medium heat; fry patties until golden brown, about 5 minutes per side.",
+        "recipeCategory":"APPETIZER_AND_SNACK",
+        "difficulty": "EASY",
+        "recipeType": "DEFAULT",
+        "prepTime": 15,
+        "cookingTime": 10,
+        "servings": 4,
+        "image_link": "https://www.allrecipes.com/thmb/ic_i4pPjDOJ2iX_4uF429lnzIPc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/1031128-easy-tuna-patties-Sugarplum-1x1-1-993d770be00748edad11872e515db839.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "egg"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "lemon juice"
+                },
+                "proportionValue": 2,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated Parmesan cheese"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "Italian-seasoned bread crumbs"    
+                },
+                "proportionValue": 10,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "drained can tuna"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "diced onion"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "pinch"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "vegetable oil"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Vodka Martini Cocktail",
+        "recipeDescription": "Combine vodka and dry vermouth in a cocktail mixing glass. Fill with ice and stir until chilled. Strain into a chilled martini glass. Garnish with three olives on a toothpick.",
+        "recipeCategory":"DRINKS",
+        "difficulty": "EASY",
+        "recipeType": "DEFAULT",
+        "prepTime": 2,
+        "cookingTime": 2,
+        "servings": 1,
+        "image_link": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7845559.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "vodka"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "dry vermouth"
+                },
+                "proportionValue": 1,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ice cube"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "olive"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "piece"
+            }
+        ]
+    },
+    {
+        "recipeName":"Churros",
+        "recipeDescription": "In a small saucepan over medium heat, combine water, 2 1\/2 tablespoons sugar, salt and 2 tablespoons vegetable oil. Bring to a boil and remove from heat. Stir in flour until mixture forms a ball. Heat oil for frying in a deep fryer or deep pot to 375 degrees F (190 degrees C). Pipe 5- to 6-inch strips of dough into the hot oil using a sturdy pastry bag fitted with a medium star tip. Do not overcrowd the oil. Fry until golden; drain on paper towels. Combine 1\/2 cup sugar and cinnamon. Roll drained churros in cinnamon and sugar mixture.",
+        "recipeCategory":"EVERYDAY_COOKING",
+        "difficulty": "MODERATE",
+        "recipeType": "DEFAULT",
+        "prepTime": 10,
+        "cookingTime": 10,
+        "servings": 4,
+        "image_link": "https://www.allrecipes.com/thmb/VgsV1EpS7X4uxYFwPxbRg_NkRok=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/392145-4d80da5a416c4d69a9c32cf798c6f156.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "water"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "reduced-sodium beef broth"
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "white sugar"    
+                },
+                "proportionValue": 2.5,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "vegetable oil"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "all-purpose flour"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "oil"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "quarts"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "white sugae"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground cinnamon"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Classic Macaroni Salad",
+        "recipeDescription": "Bring a large pot of lightly salted water to a boil. Add the macaroni, and cook until tender, about 8 minutes. Rinse under cold water and drain. In a large bowl, mix together the mayonnaise, vinegar, sugar, mustard, salt and pepper. Stir in the onion, celery, green pepper, carrot, pimentos and macaroni. Refrigerate for at least 4 hours before serving, but preferably overnight.",
+        "recipeCategory":"SALAD",
+        "difficulty": "EASY",
+        "recipeType": "DEFAULT",
+        "prepTime": 20,
+        "cookingTime": 10,
+        "servings": 4,
+        "image_link": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5500744.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "uncooked elbow macaroni"    
+                },
+                "proportionValue": 4,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "mayonaise"
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "distilled white vinegar"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "white sugar"    
+                },
+                "proportionValue": 0.6,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "prepared yellow mustard"    
+                },
+                "proportionValue": 2.5,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 1.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "large chopped onion"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped celery"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "stalk"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "seeded and chopped green bell pepper"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "grated carrot"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped pimento peppers"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Cabbage Fat-Burning Soup",
+        "recipeDescription": "Place carrots, onions, tomatoes, cabbage, green beans, peppers, and celery in a large pot. Add onion soup mix, tomato juice, beef broth, and enough water to cover vegetables. Simmer until vegetables are tender. May be stored in the refrigerator for several days.",
+        "recipeCategory":"SOUP",
+        "difficulty": "MODERATE",
+        "recipeType": "VEGETARIAN",
+        "prepTime": 20,
+        "cookingTime": 25,
+        "servings": 15,
+        "image_link": "https://www.allrecipes.com/thmb/rSWEqDST1bWrQnmxGyj1SFafQQw=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/13116-Cabbage-Fat-Burning-Soup-466e736325024f16bac9096f1ddd625d.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "chopped carrot"    
+                },
+                "proportionValue": 5,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "onion"
+                },
+                "proportionValue": 3,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "whole peeled can tomato with liquid"    
+                },
+                "proportionValue": 16,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "large head chopped cabbage"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "dry onion soup mix"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "cut and drained green beans"    
+                },
+                "proportionValue": 15,
+                "proportionUnit": "ounce"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "tomato juice"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "quarts"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "diced green bell pepper"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped celery"    
+                },
+                "proportionValue": 10,
+                "proportionUnit": "stalk"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "vegetable broth"    
+                },
+                "proportionValue": 14,
+                "proportionUnit": "ounce"
+            }
+        ]
+    },
+    {
+        "recipeName":"Easy Garlic-Lemon Scallops",
+        "recipeDescription": "Melt butter in a large skillet over medium-high heat. Stir in garlic, and cook for a few seconds until fragrant. Add scallops, and cook for several minutes on one side, then turn over, and continue cooking until firm and opaque. Remove scallops to a platter, then whisk salt, pepper, and lemon juice into butter. Pour sauce over scallops to serve.",
+        "recipeCategory":"SEAFOOD",
+        "difficulty": "EASY",
+        "recipeType": "DEFAULT",
+        "prepTime": 10,
+        "cookingTime": 20,
+        "servings": 6,
+        "image_link": "https://www.allrecipes.com/thmb/fr-hpDF8IwYM31OoGBEggvLy_7I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/5916120-easy-garlic-lemon-scallops-DavidWest-1x1-1-92620e9944204c7ca0339f547e14dc83.jpg",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "butter"    
+                },
+                "proportionValue": 0.75,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "minced garlic"
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "large sea scallops"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "pound"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "pepper"    
+                },
+                "proportionValue": 0.125,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "fresh lemon juice"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "tablespoon"
+            }
+        ]
+    },
+    {
+        "recipeName":"Grilled Fruit and Vegetable Kabobs",
+        "recipeDescription": "Heat grill to low, 325 degrees 350 degrees . Assemble kabobs, alternating different vegetables and pineapple on wooden skewers. Combine all ingredients for marinade in medium bowl and mix well. Brush marinade onto fruit and veggie kabobs. Line grill with Reynolds Wrap\u00ae Aluminum Foil. Place kabobs on grill on aluminum foil and grill for 10 to 15 minutes, or until veggies are desired doneness. Transfer kabobs to plate to cool before serving.",
+        "recipeCategory":"FRUITS_AND_VEGETABLE",
+        "difficulty": "EASY",
+        "recipeType": "VEGETARIAN",
+        "prepTime": 15,
+        "cookingTime": 15,
+        "servings": 8,
+        "image_link": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F8214192.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+        "recipeIngredients": [
+            {
+                "ingredient": {
+                    "ingredientName": "halved lengthwise and cut small yellow squash"    
+                },
+                "proportionValue": 2,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "halved lengthwise and cuts mall zucchini"
+                },
+                "proportionValue": 2,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "diced medium red onion"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "diced medium red bell pepper"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "piece"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "sliced and diced fresh pineapple"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "cherry tomato"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "olive oil"    
+                },
+                "proportionValue": 0.25,
+                "proportionUnit": "cup"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "lemon juice"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "lemon zest"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "minced garlic"    
+                },
+                "proportionValue": 1,
+                "proportionUnit": "clove"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "chopped flat-leaf parsley"    
+                },
+                "proportionValue": 3,
+                "proportionUnit": "tablespoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "salt"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            },
+            {
+                "ingredient": {
+                    "ingredientName": "ground black pepper"    
+                },
+                "proportionValue": 0.5,
+                "proportionUnit": "teaspoon"
+            }
+        ]
+    }
+]

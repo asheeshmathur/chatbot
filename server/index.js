@@ -1,5 +1,5 @@
 // Import Corpus
-const Corpus = require("./Singleton.js");
+const Corpus = require("./Singleton-I.js");
 
 const IntentHistory = require("./IntentHistory.js");
 
@@ -10,24 +10,13 @@ const http = require('http').Server(app);
 const PORT = 4000
 const socketIO = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:3000/",
-
-        allowedHeaders: ["Access-Control-Allow-Origin"],
-        handlePreflightRequest: (req, res) => {
-            res.writeHead(200, {
-                "Access-Control-Allow-Origin": "https://radhey.azurewebsites.net",
-                "Access-Control-Allow-Methods": "GET,POST",
-                "Access-Control-Allow-Headers": "Access-Control-Allow-Origin",
-                "Access-Control-Allow-Credentials": true
-            });
-            res.end();
-        }
+        origin: '*',
+        methods: ['GET', 'POST']
     }
-
-
 });
+
 // Instantiate Corpus
-const myCorpus = new Corpus("./testCorpus1.json");
+const myCorpus = new Corpus("./data.json");
 
 // Set continuation Message
 const continuationMsg = "What Next , Please"
@@ -78,17 +67,31 @@ socketIO.on('connection', (socket) => {
     socket.on("message", data => {
         let replyto = socket.id;
         console.log("Socket to be responded: " + socket.id);
-        const extracted = myCorpus.extractIntentFromText(data.text);
-        const dynamicMessage = myCorpus.randomAnswer(extracted);
+        const extracted = myCorpus.extractRecipesFromText(data.text);
+        retAnswer="";
+        if (extracted.size > 1) {
+            for (const value of extracted) {
+                retAnswer = retAnswer+" or "+value;
+            }
+
+        }
+        else {
+            const iterator1 = extracted.values();
+
+            retAnswer=iterator1.next().value
+        }
+
+        //const dynamicMessage = myCorpus.randomAnswer(extracted);
 
         //Create an instance of Intent and Response
-        const intentHistory = new IntentHistory(data.text, extracted, dynamicMessage);
+        //const intentHistory = new IntentHistory(data.text, extracted, dynamicMessage);
+        const intentHistory = new IntentHistory(data.text, extracted, extracted);
         let newArray = connectionsMap.get(socket.id);
         newArray.push(intentHistory)
         connectionsMap.set(socket.id, newArray)
         socketIO.to(replyto).emit('messageResponse',
             {
-                text: dynamicMessage,
+                text: retAnswer,
                 name: "AI Agent",
                 id: data.id,
                 socketIO: data.socketID
