@@ -22,6 +22,7 @@ const myCorpus = new Corpus("./data.json");
 const continuationMsg = "What Next , Please"
 //To keep track of all connected users
 let sockets = [];
+let continuationFlag = false;
 
 app.use(cors())
 
@@ -32,6 +33,10 @@ let connectionsMap = new Map;
 
 
 let users = []
+let retAnswer ="";
+let recipeId= -1;
+let recipeDetails="";
+
 
 socketIO.on('connection', (socket) => {
     console.log(`⚡: ${socket.id} user just connected!`)
@@ -63,52 +68,108 @@ socketIO.on('connection', (socket) => {
             })
 
     }); //message display
-
+    let recipeDetails = ""
     socket.on("message", data => {
         let replyto = socket.id;
-        console.log("Socket to be responded: " + socket.id);
         const extracted = myCorpus.extractRecipesFromText(data.text);
-        retAnswer="";
+        let singleKeyFound=false;
+        let retAnswer="";
         if (extracted.size > 1) {
-            retAnswer= "There are "+extracted.size+ " Dishes Available "
-            i =1
-            for (const value of extracted) {
-                retAnswer = retAnswer+i+" "+value +".\n\n";
-                i++;
+            // check count of matches for
+            for (let [key, value] of  extracted.entries()) {
+                if (value >= 2){
+
+                    retAnswerOne = key;
+                    singleKeyFound=true;
+                    continuationFlag = true;
+                    break;
+
+                }
+                else{
+                    // set continuation flag to false
+                    continuationFlag=false;
+
+                    retAnswer= "There are "+extracted.size+ " Dishes Available "
+                    i = 1
+                    for (const value of extracted) {
+                        retAnswer = retAnswer+i+" "+value +".\n\n";
+                        i++;
+                    }
+                    retAnswer=retAnswer+" Please Select One of these";
+                }
             }
-            retAnswer=retAnswer+" Please Select One of these";
 
         }
         else {
-            const iterator1 = extracted.values();
-
+            const iterator1 = extracted.keys();
             retAnswerOne=iterator1.next().value
+
             if (retAnswerOne == "general"){
+                // We need to provide subsequent flag
+                continuationFlag=false;
+
                 retAnswer= "Sorry, could not find any matching Recipe, please try again"
             }
-            else {
-                retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
+            else{
+                // Single Unique Recipe Found
+                // We need to provide subsequent flag
+                continuationFlag=true;
+                singleKeyFound=true;
+                const iterator1 = extracted.keys();
+
+                retAnswerOne= iterator1.next().value
+
             }
 
-            console.log(retAnswer)
         }
 
-        //const dynamicMessage = myCorpus.randomAnswer(extracted);
-
-        //Create an instance of Intent and Response
-        //const intentHistory = new IntentHistory(data.text, extracted, dynamicMessage);
         const intentHistory = new IntentHistory(data.text, extracted, extracted);
         let newArray = connectionsMap.get(socket.id);
         newArray.push(intentHistory)
         connectionsMap.set(socket.id, newArray)
-        socketIO.to(replyto).emit('messageResponse',
-            {
-                text: retAnswer,
-                name: "AI Agent",
-                id: data.id,
-                socketIO: data.socketID
-            });
-        // Send continuation message
+
+        if (continuationFlag == true && singleKeyFound == true ){
+            retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
+            recipeId= myCorpus.getRecipeId(retAnswerOne)
+            recipeDetails = myCorpus.corpus[recipeId].recipeDescription;
+            
+            socketIO.to(replyto).emit('messageResponse',
+                {
+                    text: retAnswer,
+                    name: "AI Agent",
+                    id: data.id,
+                    socketIO: data.socketID
+                });
+
+            // Send More Details
+            socketIO.to(replyto).emit('messageResponse',
+                {
+                    text: "Here's the Recipe",
+                    name: "AI Agent",
+                    id: data.id,
+                    socketIO: data.socketID
+                });
+            socketIO.to(replyto).emit('messageResponse',
+                {
+                    text: recipeDetails,
+                    name: "AI Agent",
+                    id: data.id,
+                    socketIO: data.socketID
+                });
+
+        }
+        else{
+            socketIO.to(replyto).emit('messageResponse',
+                {
+                    text: retAnswer,
+                    name: "AI Agent",
+                    id: data.id,
+                    socketIO: data.socketID
+                });
+        }
+
+
+
 
     })
     socket.on('disconnect', () => {

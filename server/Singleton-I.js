@@ -10,8 +10,6 @@ class Corpus {
         }
         Corpus.instance = this;
 
-        // List of stop words to be filtered out from the list
-        const stopWords = ['the', 'of', 'and', 'is','to','in','a','from','by','that', 'with', 'this', 'as', 'an', 'are','its', 'at', 'for'];
 
         // Prepare an instance of corpus for chatbot from JSON file
         // JSON File representing details of Recipes
@@ -35,16 +33,23 @@ class Corpus {
             // Intent -> Answers
             this.intentAnswers = new Map();
 
+            //Intent -> Original Data Id
+            this.recipeIdentifier = new Map()
+
             for (let i = 0; i < this.recipesCount; i += 1) {
-                const {recipeName, recipeCategory, prepTime, cookingTime,servings, recipeIngredients } =
+                const {recipeId=i,recipeName, recipeCategory, prepTime, cookingTime,servings, recipeIngredients } =
                     this.corpus[i];
                 const normalisedText= this.normalize(recipeName);
                 const tempKeywords = this.tokenize(normalisedText);
                 this.intentAnswers.set(recipeName, recipeName+" Preparation Time "+prepTime+" mins.  Cooking Time "+cookingTime+ "mins. Serves " +servings);
+                this.recipeIdentifier.set(recipeName,recipeId);
 
                 // Remove stop words from list as they do not add value
                 this.keywordList=tempKeywords.filter(function (item)
                 {
+                    // List of stop words to be filtered out from the list
+                    const stopWords = ['the', 'of', 'and', 'is','to','in','a','from','by','that', 'with', 'this', 'as', 'an', 'are','its', 'at', 'for'];
+
                     // Filter out stop words
                     return !stopWords.includes(item);
                 })
@@ -93,6 +98,13 @@ class Corpus {
         details =this.intentAnswers.get(key)
         return details;
     }
+
+    // Get Recipe id for extracting More Details
+    getRecipeId(recipeName) {
+        let text2="";
+        text2=this.recipeIdentifier.get(recipeName);
+        return text2;
+    }
     // Get Recipe Name based on string, a collection of intents extracted from message
     extractRecipesFromText(rawText) {
         let tokenizedText =[]
@@ -112,8 +124,8 @@ class Corpus {
         let foundCount =0;
         // Collection of matching recipes
         // Array as it  supports multiple matching text
-        let returnKey = new Set();
-        let answer ="" ;
+        //let returnKey = new Set();
+        let returnKey = new Map();
 
         //Pattern Matching to identify Recipe
         // Iterate the list of Keywords returns Intent as per the first keyword match
@@ -129,25 +141,33 @@ class Corpus {
                     if (tokenizedText[i] == lowerCaseValue)
                     {
                         foundCount++;
-                        // Object with Intent as well as random answer
-                        //const answer ={"Recipe":key, "Answer":this.intentAnswers.values(key)};
 
                         // Add Corresponding Intent
-                        returnKey.add(key)
+                        if (returnKey.has(key))
+                        {
+                            let count =0;
+                            count =returnKey.get(key);
+                            returnKey.set(key, count+1)
+                        }
+                        else{
+                            returnKey.set(key, 1)
+                            
+                        }
                     }
+                    
                 }
 
             });
         }
 
-        // Means this is general
+
         if (foundCount > 0) {
             return returnKey ;
 
         }
         else{
-            // Return
-            return returnKey.add("general") ;
+            // Means this is general - No matching recipe found
+            return returnKey.set("general",1) ;
         }
 
     }
@@ -191,8 +211,6 @@ class Corpus {
 
         //Randomly Select an Answer
         return answerArray[Math.floor(Math.random() * answerArray.length)];
-
-
 
     }
     //Retrieve all Answers for an Intent
