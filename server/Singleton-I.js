@@ -54,7 +54,7 @@ class Corpus {
 
 
             }
-            console.log("Om Shri Shri Durga")
+            console.log("Server Started")
 
         } catch (error) {
             console.log("Some thing Wrong ");

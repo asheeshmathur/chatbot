@@ -44,7 +44,7 @@ socketIO.on('connection', (socket) => {
 
     // Welcome Message on establishing connection
     socketIO.emit("messageResponse", {
-        text: "How Can I Help You",
+        text: "Welcome To World of Exotic Recipes, Looking for some recipes. Can I Help find a one",
         name: "AI Agent",
         id: "007",
         socketID: socketIO.id
@@ -83,7 +83,13 @@ socketIO.on('connection', (socket) => {
             const iterator1 = extracted.values();
 
             retAnswerOne=iterator1.next().value
-            retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
+            if (retAnswerOne == "general"){
+                retAnswer= "Sorry, could not find any matching Recipe, please try again"
+            }
+            else {
+                retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
+            }
+
             console.log(retAnswer)
         }
 
