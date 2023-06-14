@@ -1,3 +1,5 @@
+
+var os = require('os');
 // Import Corpus
 const Corpus = require("./Singleton-I.js");
 
@@ -36,6 +38,17 @@ let users = []
 let retAnswer ="";
 let recipeId= -1;
 let recipeDetails="";
+function parseIngredients(ingredientArray) {
+    let text ="";
+    for (let i = 0; i < ingredientArray.length; i++) {
+
+           text += " "+ingredientArray[i].ingredient.ingredientName
+           text += " "+ingredientArray[i].proportionValue + " - ";
+           text += " "+ingredientArray[i].proportionUnit  + " |\n "+ os.EOL;
+
+        }
+    return text;
+}
 
 
 socketIO.on('connection', (socket) => {
@@ -68,7 +81,8 @@ socketIO.on('connection', (socket) => {
             })
 
     }); //message display
-    let recipeDetails = ""
+    let recipeDetails = "Recipe Details \n";
+    let ingredientsDetails = "Ingredients \n";
     socket.on("message", data => {
         let replyto = socket.id;
         const extracted = myCorpus.extractRecipesFromText(data.text);
@@ -107,7 +121,6 @@ socketIO.on('connection', (socket) => {
             if (retAnswerOne == "general"){
                 // We need to provide subsequent flag
                 continuationFlag=false;
-
                 retAnswer= "Sorry, could not find any matching Recipe, please try again"
             }
             else{
@@ -116,7 +129,6 @@ socketIO.on('connection', (socket) => {
                 continuationFlag=true;
                 singleKeyFound=true;
                 const iterator1 = extracted.keys();
-
                 retAnswerOne= iterator1.next().value
 
             }
@@ -132,7 +144,7 @@ socketIO.on('connection', (socket) => {
             retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
             recipeId= myCorpus.getRecipeId(retAnswerOne)
             recipeDetails = myCorpus.corpus[recipeId].recipeDescription;
-            
+            ingredientsDetails= parseIngredients(myCorpus.corpus[recipeId].recipeIngredients);
             socketIO.to(replyto).emit('messageResponse',
                 {
                     text: retAnswer,
@@ -141,7 +153,7 @@ socketIO.on('connection', (socket) => {
                     socketIO: data.socketID
                 });
 
-            // Send More Details
+            // Send  Recipe Details of the
             socketIO.to(replyto).emit('messageResponse',
                 {
                     text: "Here's the Recipe",
@@ -151,11 +163,12 @@ socketIO.on('connection', (socket) => {
                 });
             socketIO.to(replyto).emit('messageResponse',
                 {
-                    text: recipeDetails,
+                    text: "Recipe "+recipeDetails +"\r\n\t"+ingredientsDetails+ " ] ",
                     name: "AI Agent",
                     id: data.id,
                     socketIO: data.socketID
                 });
+
 
         }
         else{
@@ -167,9 +180,6 @@ socketIO.on('connection', (socket) => {
                     socketIO: data.socketID
                 });
         }
-
-
-
 
     })
     socket.on('disconnect', () => {
