@@ -3,12 +3,17 @@ var os = require('os');
 // Import Corpus
 const Corpus = require("./Singleton-I.js");
 
-const IntentHistory = require("./IntentHistory.js");
+const IntentHistoryItem = require("./IntentHistoryItem.js");
+const IntentHistoryStack = require("./IntentHistoryStack.js");
+const EventLogger = require("./EventLogger");
+
 
 const express = require("express")
 const app = express()
 const cors = require("cors")
 const http = require('http').Server(app);
+app.use(cors())
+
 const PORT = 4000
 const socketIO = require('socket.io')(http, {
     cors: {
@@ -22,22 +27,24 @@ const myCorpus = new Corpus("./data.json");
 
 // Set continuation Message
 const continuationMsg = "What Next , Please"
+
 //To keep track of all connected users
 let sockets = [];
 let continuationFlag = false;
 
-app.use(cors())
 
 console.log(`Ready to Serve`);
 
-// HashMap for all sockets and their details
-let connectionsMap = new Map;
+// Logger for all socket events between client & server
+let eventLogger = new EventLogger();
 
-
+//Initializing various parameters
 let users = []
 let retAnswer ="";
 let recipeId= -1;
 let recipeDetails="";
+
+// Parse all ingredients
 function parseIngredients(ingredientArray) {
     let text ="";
     for (let i = 0; i < ingredientArray.length; i++) {
@@ -52,26 +59,31 @@ function parseIngredients(ingredientArray) {
 
 
 socketIO.on('connection', (socket) => {
+    // Add its record in map,
+    entry = new IntentHistoryItem("CONN","REQ","None");
+    eventLogger.addItem(socket.id,entry)
     console.log(`⚡: ${socket.id} user just connected!`)
-    // Add its record in map, empty array to start with
-    connectionsMap.set(socket.id, new Array());
+
 
     // Emit the connected users when a new socket connects
     let sock = socket.id;
     sockets.push(sock);
 
+
     // Welcome Message on establishing connection
+    entry = new IntentHistoryItem("CONN","WelConnection","WELCOME-MSG");
+    eventLogger.addItem(socket.id, entry)
     socketIO.emit("messageResponse", {
         text: "Welcome To World of Exotic Recipes, Looking for some recipes. Can I Help find a one",
         name: "AI Agent",
-        id: "007",
+        id: Math.random(),
         socketID: socketIO.id
     })
 
     socket.on("messageDisplay", data => {
         console.log("Socket to be responded: " + socket.id);
         let replyto = socket.id;
-        // Ping Back what user typed in
+        // Ping Back what user has typed in
         socketIO.to(replyto).emit("messageResponse",
             {
                 text: data.text,
@@ -153,6 +165,8 @@ socketIO.on('connection', (socket) => {
                     socketIO: data.socketID
                 });
 
+
+
             // Send  Recipe Details of the
             socketIO.to(replyto).emit('messageResponse',
                 {
@@ -161,13 +175,27 @@ socketIO.on('connection', (socket) => {
                     id: data.id,
                     socketIO: data.socketID
                 });
-            socketIO.to(replyto).emit('messageResponse',
+
+
+            socketIO.to(replyto).emit('messageRecipeResponse',
                 {
-                    text: "Recipe "+recipeDetails +"\r\n\t"+ingredientsDetails+ " ] ",
+                    text: recipeDetails,
                     name: "AI Agent",
                     id: data.id,
                     socketIO: data.socketID
                 });
+
+
+            socketIO.to(replyto).emit('messageIngredientsResponse',
+                {
+                    text: `Ingredients
+                          ${ingredientsDetails}`,
+                    name: "AI Agent",
+                    id: data.id,
+                    socketIO: data.socketID
+                });
+
+
 
 
         }
