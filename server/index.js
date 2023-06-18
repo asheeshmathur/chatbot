@@ -147,10 +147,6 @@ socketIO.on('connection', (socket) => {
 
         }
 
-        const intentHistory = new IntentHistory(data.text, extracted, extracted);
-        let newArray = connectionsMap.get(socket.id);
-        newArray.push(intentHistory)
-        connectionsMap.set(socket.id, newArray)
 
         if (continuationFlag == true && singleKeyFound == true ){
             retAnswer = myCorpus.getIntentAnswers(retAnswerOne)
@@ -200,6 +196,8 @@ socketIO.on('connection', (socket) => {
 
         }
         else{
+            let history =[]
+            history = eventLogger.retrieveAllItems(socket.id);
             socketIO.to(replyto).emit('messageResponse',
                 {
                     text: retAnswer,
@@ -212,7 +210,10 @@ socketIO.on('connection', (socket) => {
     })
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
+
         users = users.filter(user => user.socketID !== socket.id)
+        //Removing disconnecting socket record
+        eventLogger.removeDetails(socket.id)
         socketIO.emit("newUserResponse", users)
         socket.disconnect()
     });

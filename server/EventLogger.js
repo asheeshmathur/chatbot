@@ -16,6 +16,20 @@ class EventLogger {
         }
     }
 
+    // Remove all records associated with a
+    removeDetails(socket){
+        if (socket !=null && this.map.has(socket)){
+        // Remove records associated with this socket
+            return this.map.delete(socket)
+        }
+    }
+
+retrieveAllItems(socket){
+        if (socket !=null &&  this.map.has(socket)){
+            //Retrieve all items from history
+            return this.map.get(socket);
+        }
+}
     addItem(socket, item) {
         let stack = ""
         if (socket != null && item != null) {
