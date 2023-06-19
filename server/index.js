@@ -1,4 +1,3 @@
-
 var os = require('os');
 // Import Corpus
 const Corpus = require("./Singleton-I.js");
@@ -71,10 +70,22 @@ socketIO.on('connection', (socket) => {
 
 
     // Welcome Message on establishing connection
-    entry = new IntentHistoryItem("CONN","WelConnection","WELCOME-MSG");
+    entry = new IntentHistoryItem("CONN","WelConnection-I","WELCOME-MSG");
     eventLogger.addItem(socket.id, entry)
     socketIO.emit("messageResponse", {
-        text: "Welcome To World of Exotic Recipes, Looking for some recipes. Can I Help find a one",
+        text: myCorpus.welcomeMsg(1),
+        name: "AI Agent",
+        id: Math.random(),
+        socketID: socketIO.id
+    })
+    // Welcome Message on establishing connection
+    entry = new IntentHistoryItem("CONN-II","WelConnection-II","WELCOME-MSG");
+    eventLogger.addItem(socket.id, entry)
+
+
+    socketIO.emit("messageResponse", {
+        //text: "Welcome To World of Exotic Recipes, Looking for some recipes. Can I Help find a one",
+        text: myCorpus.welcomeMsg(2),
         name: "AI Agent",
         id: Math.random(),
         socketID: socketIO.id

@@ -70,7 +70,7 @@ class Corpus {
 
     // Normalize input text and convert it to small case
     normalize(text) {
-       return text
+        return text
             .normalize()
             .toLowerCase();
     }
@@ -93,6 +93,27 @@ class Corpus {
 
     }
 
+
+    // Generate random number in a range
+    randomNumber(min, max) {
+        return Math.trunc(Math.random() * (max - min) + min);
+    }
+    welcomeMsg(seq){
+        let wMsg = ""
+        if (seq ==1){
+            wMsg = `Welcome to Recipe World \r\n
+                You Have ${this.recipesCount}  Exotic Recipes to Choose From`;
+        }
+        else{
+            let i = this.randomNumber(0, 17);
+            let j = this.randomNumber(0,17);
+            let temp = this.corpus[i]
+            wMsg = `Wide Variety to Choose  from Like ${this.corpus[i]['recipeName']}
+        & ${this.corpus[j]['recipeName']}`;
+        }
+        return wMsg;
+
+    }
     getIntentAnswers(key){
         let details =""
         details =this.intentAnswers.get(key)
@@ -151,10 +172,10 @@ class Corpus {
                         }
                         else{
                             returnKey.set(key, 1)
-                            
+
                         }
                     }
-                    
+
                 }
 
             });
