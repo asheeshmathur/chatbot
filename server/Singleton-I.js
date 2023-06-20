@@ -98,22 +98,45 @@ class Corpus {
     randomNumber(min, max) {
         return Math.trunc(Math.random() * (max - min) + min);
     }
-    welcomeMsg(seq){
-        let wMsg = ""
-        if (seq ==1){
-            wMsg = `Welcome to Recipe World \r\n
-                You Have ${this.recipesCount}  Exotic Recipes to Choose From`;
-        }
-        else{
-            let i = this.randomNumber(0, 17);
-            let j = this.randomNumber(0,17);
-            let temp = this.corpus[i]
-            wMsg = `Wide Variety to Choose  from Like ${this.corpus[i]['recipeName']}
-        & ${this.corpus[j]['recipeName']}`;
-        }
-        return wMsg;
+    welcomeMsg(){
+
+        return "Welcome !, How can I help you ";
 
     }
+
+    // Get Basic Intents
+    getIntentFromText(rawText){
+        let tokenizedText =[]
+        // Normalise Text
+        const normalisedTextOne = this.normalize(rawText);
+        // Tokenize
+        const tempTokenizedText= this.tokenize(normalisedTextOne);
+        // Remove Stop Words
+        tokenizedText=tempTokenizedText.filter(function (item)
+        {
+            // List of stop words to be filtered out from the list
+            const stopWords = ['the', 'of', 'and', 'is','to','in','a','from','by','that', 'with', 'this', 'as', 'an', 'are','its', 'at', 'for'];
+
+            // Filter out stop words
+            return !stopWords.includes(item);
+        })
+        let hungryflag = false;
+        // Collection of matching recipes
+        // Array as it  supports multiple matching text
+        //let returnKey = new Set();
+        let returnKey = new Map();
+        //Check for Hungry as a keyword
+        //Pattern Matching to identify Recipe
+        // Iterate the list of Keywords returns Intent as per the first keyword match
+        for (let i = 0; i < tokenizedText.length; i++) {
+            if(tokenizedText[i] == "hungry"){
+                hungryflag = true;
+                return "Sure, what would you like to eat ?"
+            }
+        }   //End of for loop
+
+    }
+
     getIntentAnswers(key){
         let details =""
         details =this.intentAnswers.get(key)
