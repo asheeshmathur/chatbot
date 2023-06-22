@@ -35,16 +35,20 @@ class IntentCorpus {
             // Populate Keywords
             this.intentKeywords = new Map();
 
+            //Map to hold map if Intents to Recipe Name
+            // Populate Keywords
+            this.intentRecipies = new Map();
+
             //Choice Intent
             this.choiceIntent = "choice";
             //Answer Array
             this.answerArray=[]
             // Extract Map of all Keywords & Their Intents
             for (let i = 0; i < this.corpus.data.length; i += 1) {
-                const {intent, keywords, answer} = this.corpus.data[i];
+                const {intent, keywords, recipeNames,answer} = this.corpus.data[i];
                 this.intentAnswer.set(intent, answer);
                 this.intentKeywords.set(intent, keywords);
-
+                this.intentRecipies.set(intent, recipeNames);
                 // Keyword - Intent
                 for (let j = 0; j < keywords.length; j += 1) {
                     this.keywordIntent.set(keywords[j], intent);
@@ -60,7 +64,7 @@ class IntentCorpus {
 
     // Normalize input text and convert it to small case
     normalize(text) {
-       return text
+        return text
             .normalize()
             .toLowerCase();
     }
@@ -90,7 +94,7 @@ class IntentCorpus {
         tokenizedText=tempTokenizedText.filter(function (item)
         {
             // List of stop words to be filtered out from the list
-            const stopWords = ['the', 'of', 'and', 'is','to','in','a','from','by','that', 'with',  'as', 'an', 'are','its', 'at', 'for'];
+            const stopWords = ['me','want','i','the', 'of', 'and', 'is','to','in','a','from','by','that', 'with',  'as', 'an', 'are','its', 'at', 'for'];
 
             // Filter out stop words
             return !stopWords.includes(item);
@@ -106,17 +110,25 @@ class IntentCorpus {
         //Pattern Matching to identify Recipe
         // Iterate the list of Keywords returns Intent as per the first keyword match
         for (let i = 0; i < tokenizedText.length; i++) {
+            if(tokenizedText[i] == "red")
+            {
+                console.log("Query has Red");
+            }
             // Iterate through each intent in a map
             for (let [key, value] of this.intentKeywords) {
 
                 for (let j = 0; j < value.length; j++) {
+                    if(value[j] == "red"){
+                        console.log("Data has Red");
+                    }
+
                     if (value[j].includes(tokenizedText[i])){
                         foundCount++;
                         // Add Corresponding Intent
-
                         if (returnKey.has(key))
                         {
                             let count =0;
+
                             count =returnKey.get(key);
                             returnKey.set(key, count+1);
 
@@ -129,22 +141,9 @@ class IntentCorpus {
                     } // end if
                 }// End for J
             }
-            /*
-            if (foundCount > 0)
-            {
-                return returnKey;
-            }
-            else{
-                // Means this is general - No matching recipe found
-                return returnKey.set("general",1) ;
-            }
 
-             */
-            return returnKey;
-
-        }
-
-
+        } //End of Tokens i
+          return returnKey;
     }
 
     // Get All Answers for a specific intent

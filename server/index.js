@@ -49,50 +49,6 @@ let retAnswer ="";
 let recipeId= -1;
 let recipeDetails="";
 
-function processUserIntents(uIntents,rCorpus){
-    let answer=[];
-    // Holds the Map of all queryable fields
-    let qMap = new Map();
-
-    let finalAnswer =""
-    if (uIntents != null){
-        uIntents.forEach(function (value) {
-            answer =   intentCorpus.intentAnswer.get(value);
-            for (let key in answer.query)
-            {
-                if (answer.query.hasOwnProperty(key))
-                {
-                    value = answer.query[key];
-                    qMap.set(key,value);
-
-                } // End If
-            } // End for
-            // Now iterate all recipes matching answer
-            for (let i =0 ; rCorpus.corpus.length; i++){
-                let matchCount = 0;
-                let tVal ="";
-                qMap.forEach(function(value, key) {
-                    const fullMap = new Map(Object.entries((rCorpus.corpus[i])));
-                    if (fullMap.has(key))
-                    {
-                        tVal = fullMap.get(key);
-                        if (tVal == value){
-                            matchCount++;
-                        }
-                    }
-
-                })
-
-
-
-            }
-
-        });
-        return finalAnswer;
-    }
-
-
-}
 
 socketIO.on('connection', (socket) => {
     // Add its record in map,
@@ -130,30 +86,26 @@ socketIO.on('connection', (socket) => {
 
     socket.on("message", data => {
         let replyto = socket.id;
-        let intentSet = new Map();
+        let intentMap = new Map();
+        let recipes="";
 
-        intentSet = intentCorpus.extractIntentsFromText(data.text);
-        console.log("Identified ",intentSet.keys());
-        let ossd = "";
-        if (intentSet.size > 0){
-            intentIter = intentSet.values();
-            let intents="";
-
-            for (let i=0; i<intentSet.size; i++)
-            {
-                intents= intentIter.next().value+" ";
-
+        intentMap = intentCorpus.extractIntentsFromText(data.text);
+        console.log("Identified ",intentMap.keys());
+        recipes = "We have identified following Recipes ";
+        if (intentMap.size > 0){
+            recipes = "We have identified following Recipes ";
+            for (let key of intentMap.keys()) {
+                recipes= recipes+intentCorpus.intentRecipies.get(key);
             }
-            ossd= `Good ...we have ${intentSet.size} Recipes per 
-            your choice.  `
+
         }
-
-       // let ossd = processUserIntents(intentCorpus.extractIntentFromText(data.text),recipeCorpus);
-
+        else{
+            recipes = "Sorry, we could not identify any recipes matching your criteria, please refine search.";
+        }
 
         socketIO.to(replyto).emit("messageResponse",
             {
-                text: ossd,
+                text: recipes,
                 name: "AI Agent",
                 id: data.id,
                 socketID: data.socketID

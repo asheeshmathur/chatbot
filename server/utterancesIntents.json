@@ -24,12 +24,13 @@
     {
       "id": 2,
       "recipeNames":["Vegetarian Moussaka", "Easy Tuna Patties"],
-      "intent": "Vegetarian Moussaka, Easy Tuna Patties",
+      "intent": "Moussaka",
       "keywords": [
         "easy",
         "less efforts",
         "less time",
         "quick",
+        "red",
         "in half an hour",
         "in 20 minutes",
         "everyday"
@@ -187,6 +188,7 @@
         "quick bite",
         "appetizer",
         "before meal",
+        "appetizer",
         "for munching"
       ],
       "answer": {
@@ -204,7 +206,8 @@
       "keywords": [
         "diabetic friendly",
         "diabetic",
-        "sugarfree"
+        "sugarfree",
+        "diabetes"
       ],
       "answer": {
         "returns": "recipeName",
