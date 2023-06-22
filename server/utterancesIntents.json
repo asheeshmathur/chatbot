@@ -4,6 +4,7 @@
   "data": [
     {
       "id": 1,
+      "recipeNames":["Cabbage Fat-Burning Soup ", "Grilled Fruit and Vegetable Kabobs","Vegetarian Moussaka"] ,
       "intent": "vegetarian-food",
       "keywords": [
         "vegetarian",
@@ -22,6 +23,7 @@
   ,
     {
       "id": 2,
+      "recipeNames":["Vegetarian Moussaka", "Easy Tuna Patties"],
       "intent": "Vegetarian Moussaka, Easy Tuna Patties",
       "keywords": [
         "easy",
@@ -42,6 +44,7 @@
   ,
     {
       "id": 3,
+      "recipeNames":["Gourmet Mushroom Rissoto"],
       "intent": "Gourmet-dish",
       "keywords": [
         "fancy",
@@ -58,6 +61,7 @@
   ,
     {
       "id": 4,
+      "recipeNames":["Gourmet Mushroom Risotto","Chicken Parmesan"],
       "intent": "red-meat-free",
       "keywords": [
         "without beef",
@@ -75,25 +79,13 @@
   ,
     {
       "id": 5,
+      "recipeNames":["Dessert Crepes"],
       "intent": "breakfast-brunch",
       "keywords": [
         "breakfast",
         "morning",
         "brunch",
-        "early lunch"
-      ],
-      "answer": {
-        "returns": "recipeName",
-        "query":{
-          "recipeCategory": "BREAKFAST_AND_BRUNCH"
-        }
-      }
-    }
-  ,
-    {
-      "id": 6,
-      "intent": "dessert",
-      "keywords": [
+        "early lunch",
         "dessert",
         "something sweet",
         "sweet",
@@ -103,13 +95,15 @@
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeName": "Dessert Crepes"
+          "recipeCategory": "BREAKFAST_AND_BRUNCH"
         }
       }
     }
   ,
+
     {
-      "id": 7,
+      "id": 6,
+      "recipeNames":["Easy Garlic-Lemon Scallops"],
       "intent": "seafood",
       "keywords": [
         "scallops",
@@ -127,7 +121,8 @@
     }
   ,
     {
-      "id": 8,
+      "id": 7,
+      "recipeNames":["Cabbage Fat-Burning Soup"],
       "intent": "healthy-dish",
       "keywords": [
         "healthy",
@@ -146,7 +141,8 @@
     }
   ,
     {
-      "id": 9,
+      "id": 8,
+      "recipeNames":["Classic Macaroni Salad"],
       "intent": "salad",
       "keywords": [
         "salad",
@@ -161,11 +157,13 @@
     }
   ,
     {
-      "id": 10,
+      "id": 9,
+      "recipeNames":["Vodka Martini Cocktail"],
       "intent": "drink",
       "keywords": [
         "drinks",
         "drink",
+        "default",
         "cocktail",
         "alcohol",
         "martini",
@@ -180,7 +178,8 @@
     }
   ,
     {
-      "id": 11,
+      "id": 10,
+      "recipeNames":["Easy Tuna Patties"],
       "intent": "appetizer-snack",
       "keywords": [
         "easy",
@@ -199,7 +198,8 @@
     }
   ,
     {
-      "id": 12,
+      "id": 11,
+      "recipeNames": ["Diabetic-Friendly Pork Stroganoff"],
       "intent": "Diabetic-Friendly",
       "keywords": [
         "diabetic friendly",
