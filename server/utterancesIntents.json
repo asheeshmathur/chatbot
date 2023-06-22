@@ -1,0 +1,217 @@
+{
+  "name": "intentMaster",
+
+  "data": [
+    {
+      "id": 1,
+      "intent": "vegetarian-food",
+      "keywords": [
+        "vegetarian",
+        "without meat",
+        "without red meat",
+        "veg",
+        "no meat"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeType": "VEGETARIAN"
+        }
+      }
+    }
+  ,
+    {
+      "id": 2,
+      "intent": "Vegetarian Moussaka, Easy Tuna Patties",
+      "keywords": [
+        "easy",
+        "less efforts",
+        "less time",
+        "quick",
+        "in half an hour",
+        "in 20 minutes",
+        "everyday"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "difficulty": "EASY", "cookingTime": "20", "recipeCategory": "EVERYDAY_COOKING"
+        }
+      }
+    }
+  ,
+    {
+      "id": 3,
+      "intent": "Gourmet-dish",
+      "keywords": [
+        "fancy",
+        "elegant",
+        "gourmet"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeName": "Gourmet Mushroom Rissoto"
+        }
+      }
+    }
+  ,
+    {
+      "id": 4,
+      "intent": "red-meat-free",
+      "keywords": [
+        "without beef",
+        "without red meat",
+        "no red meat",
+        "vegetarian"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeType": "RED_MEAT_FREE"
+        }
+      }
+    }
+  ,
+    {
+      "id": 5,
+      "intent": "breakfast-brunch",
+      "keywords": [
+        "breakfast",
+        "morning",
+        "brunch",
+        "early lunch"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "BREAKFAST_AND_BRUNCH"
+        }
+      }
+    }
+  ,
+    {
+      "id": 6,
+      "intent": "dessert",
+      "keywords": [
+        "dessert",
+        "something sweet",
+        "sweet",
+        "sugary",
+        "crepes"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeName": "Dessert Crepes"
+        }
+      }
+    }
+  ,
+    {
+      "id": 7,
+      "intent": "seafood",
+      "keywords": [
+        "scallops",
+        "seafood",
+        "pescatarian",
+        "from the sea",
+        "ocean delicacies"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "SEAFOOD"
+        }
+      }
+    }
+  ,
+    {
+      "id": 8,
+      "intent": "healthy-dish",
+      "keywords": [
+        "healthy",
+        "less fat",
+        "diet",
+        "fat free",
+        "very healthy",
+        "hearty"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeName": "Cabbage Fat-Burning Soup"
+        }
+      }
+    }
+  ,
+    {
+      "id": 9,
+      "intent": "salad",
+      "keywords": [
+        "salad",
+        "classic"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "SALAD"
+        }
+      }
+    }
+  ,
+    {
+      "id": 10,
+      "intent": "drink",
+      "keywords": [
+        "drinks",
+        "drink",
+        "cocktail",
+        "alcohol",
+        "martini",
+        "Vodka"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "DRINKS"
+        }
+      }
+    }
+  ,
+    {
+      "id": 11,
+      "intent": "appetizer-snack",
+      "keywords": [
+        "easy",
+        "snack",
+        "quick bite",
+        "appetizer",
+        "before meal",
+        "for munching"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "APPETIZER_AND_SNACK"
+        }
+      }
+    }
+  ,
+    {
+      "id": 12,
+      "intent": "Diabetic-Friendly",
+      "keywords": [
+        "diabetic friendly",
+        "diabetic",
+        "sugarfree"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "APPETIZER_AND_SNACK"
+        }
+      }
+    }
+  ]
+}
