@@ -3,9 +3,11 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const http = require('http').Server(app);
-app.use(cors())
-
-const PORT = 4000
+app.use(express.static('public'));
+const PORT = process.env.PORT || 3000
+app.get('/', (req, res) => {
+    res.send('<h1>Hello world</h1>');
+});
 
 const IntentHistoryItem = require("./IntentHistoryItem.js");
 const IntentHistoryStack = require("./IntentHistoryStack.js");
