@@ -72,6 +72,21 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
         // Simple
         message =workflowStep+" | "+"Would you like instead go for an easy, moderate or a difficult recipe ?"
     }
+    else if (workflowStep == 6 ){
+        // Complex
+        //Complexity time received
+        
+        message = workflowStep+" | "+"Here are Recipes Matching Your Cooking Difficulty Level ";
+        // Iterate
+        for (let i = 0; i < recpList.length; i++) {
+            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+            extractedComplexity = map.get("difficulty");
+            if (extractedComplexity == addData){
+                message = message+ map.get("recipeName");
+            }
+        }
+        
+    }
     return message;
 
 }
@@ -155,10 +170,10 @@ socketIO.on('connection', (socket) => {
             respondBack=true;
 
         }
-        else if (workflowStep==6){
-            // Extract Cooking Time from Input and pass it to prepareMessage
+        else if (workflowStep==5){
+            workflowStep=6;
+            // Extract Complexity calculation from Input and pass it to prepareMessage
             responseMessage=prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
-            respondBack=true;
         }
 
         socketIO.to(replyto).emit("messageResponse", {
@@ -169,11 +184,19 @@ socketIO.on('connection', (socket) => {
         })
         triggerResponse =true;
         if (triggerResponse=true){
-            if (workflowStep=2){
+            if (workflowStep == 2){
                 workflowStep = 3;
                 // Simple Processing
                 msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
                 triggerResponse=true;
+
+            }
+            if (workflowStep == 4){
+                workflowStep=5;
+                //Simple Processing , ask for complexity
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                triggerResponse=true;
+
 
             }
 
