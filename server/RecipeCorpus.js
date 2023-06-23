@@ -101,7 +101,10 @@ class RecipeCorpus {
     }
     welcomeMsg(){
 
-        return "Welcome !, How can I help you ";
+        return "Welcome to the World of Yummy Recipes. " +
+            "Are you in the mood to eat Vegetarian, Non " +
+            "Vegetarian or Vegan" ;
+
 
     }
 

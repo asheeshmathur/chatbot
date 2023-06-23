@@ -5,9 +5,7 @@ const cors = require("cors")
 const http = require('http').Server(app);
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000
-app.get('/', (req, res) => {
-    res.send('<h1>Hello world</h1>');
-});
+
 
 const IntentHistoryItem = require("./IntentHistoryItem.js");
 const IntentHistoryStack = require("./IntentHistoryStack.js");
@@ -18,6 +16,7 @@ const IntentCorpus = require("./IntentCorpus.js");
 
 // Reference to Recipe Corpus
 const RecipeCorpus = require("./RecipeCorpus.js");
+const {Socket} = require("socket.io");
 
 // Instantiate Recipe Corpus
 const recipeCorpus = new RecipeCorpus("./data.json");
@@ -53,66 +52,95 @@ let recipeDetails="";
 
 
 socketIO.on('connection', (socket) => {
+    // Manage the Steps of Conversations
+    let stepInPortal =0;
+    let respondBack = false;
+    let triggerResponse=false;
+    let isRecipeDelivered = false;
+    
     // Add its record in map,
     entry = new IntentHistoryItem("CONN","REQ","None");
     eventLogger.addItem(socket.id,entry)
     console.log(`⚡: ${socket.id} user just connected!`)
-  // Emit the connected users when a new socket connects
+    // Emit the connected users when a new socket connects
     let sock = socket.id;
     sockets.push(sock);
-
+    
     // Welcome Message on establishing connection
     entry = new IntentHistoryItem("CONN","WelConnection-I","WELCOME-MSG");
     eventLogger.addItem(socket.id, entry)
+    // Increment Step
+    stepInPortal++;
+    
     socketIO.emit("messageResponse", {
-        text: recipeCorpus.welcomeMsg(),
-        name: "AI Agent",
-        id: Math.random(),
-        socketID: socketIO.id
+    text: recipeCorpus.welcomeMsg(),
+    name: "AI Agent",
+    id: Math.random(),
+    socketID: socketIO.id
     })
-
-
+    
+    
     socket.on("messageDisplay", data => {
         console.log("Socket to be responded: " + socket.id);
         let replyto = socket.id;
         // Ping Back what user has typed in
         socketIO.to(replyto).emit("messageResponse",
-            {
-                text: data.text,
-                name: data.name,
-                id: data.id,
-                socketID: data.socketID
-            })
-
+                                  {
+        text: data.text,
+        name: data.name,
+        id: data.id,
+        socketID: data.socketID
+        })
+        
     }); //message display
-
+    
     socket.on("message", data => {
         let replyto = socket.id;
         let intentMap = new Map();
         let recipes="";
-
         intentMap = intentCorpus.extractIntentsFromText(data.text);
         console.log("Identified ",intentMap.keys());
         recipes = "We have identified following Recipes ";
         if (intentMap.size > 0){
             recipes = "We have identified following Recipes ";
             for (let key of intentMap.keys()) {
-                recipes= recipes+intentCorpus.intentRecipies.get(key);
-            }
 
+                recipes= recipes+intentCorpus.intentRecipies.get(key);
+                // Get Flags associated with these recipes
+
+            }
+            stepInPortal++;
+            isRecipeDelivered=true;
+            respondBack=true;
         }
         else{
             recipes = "Sorry, we could not identify any recipes matching your criteria, please refine search.";
         }
-
-        socketIO.to(replyto).emit("messageResponse",
-            {
-                text: recipes,
+        
+        socketIO.to(replyto).emit("messageResponse", {
+        text: recipes,
+        name: "AI Agent",
+        id: data.id,
+        socketID: data.socketID
+        })
+        triggerResponse =true;
+        if (triggerResponse=true){
+            triggerResponse =false;
+            let msg = "So do you have any health concerns?" +
+                "We have diabetic-friendly, gluten-free " +
+                "& low cholesterol recipes as well, " +
+                "Time explore ..."
+            socketIO.to(replyto).emit("messageResponseCont", {
+                text: msg,
                 name: "AI Agent",
                 id: data.id,
                 socketID: data.socketID
             })
+
+        }
+
     })
+
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
 
@@ -123,6 +151,7 @@ socketIO.on('connection', (socket) => {
         socket.disconnect()
     });
 })
+
 http.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
