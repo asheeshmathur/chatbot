@@ -31,10 +31,6 @@ const socketIO = require('socket.io')(http, {
         methods: ['GET', 'POST']
     }
 });
-
-// Set continuation Message
-const continuationMsg = "What Next , Please"
-
 //To keep track of all connected users
 let sockets = [];
 let continuationFlag = false;
@@ -48,15 +44,43 @@ let eventLogger = new EventLogger();
 let users = []
 let retAnswer ="";
 let recipeId= -1;
-let recipeDetails="";
+let rcpList="";
 
+function prepareMessage(workflowStep,recpList, rCorpus,addData ){
+    let message="";
+    if (workflowStep == 3){
+        // Simple
+        // Recipes served
+        message = workflowStep+" | "+"Sure, how much cooking time (in minutes) do you have ? Please enter a numeric figure only "
+    }
+    else if (workflowStep==4){
+        // Complex
+        //Cooking time received
+        cookingTime = addData;
+        let extractedCkTime =0
+        message = workflowStep+" | "+"Here are Recipes Matching Your Cooking Time ";
+        // Iterate
+        for (let i = 0; i < recpList.length; i++) {
+            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+            extractedCkTime = map.get("prepTime")+map.get("cookingTime");
+            if (extractedCkTime <= addData){
+                message = message+ map.get("recipeName");
+            }
+        }
+    }
+    else if (workflowStep == 5 ){
+        // Simple
+        message =workflowStep+" | "+"Would you like instead go for an easy, moderate or a difficult recipe ?"
+    }
+    return message;
 
+}
 socketIO.on('connection', (socket) => {
     // Manage the Steps of Conversations
-    let stepInPortal =0;
+    let workflowStep = 0;
     let respondBack = false;
-    let triggerResponse=false;
-    let isRecipeDelivered = false;
+    let triggerResponse= false;
+
     
     // Add its record in map,
     entry = new IntentHistoryItem("CONN","REQ","None");
@@ -69,16 +93,15 @@ socketIO.on('connection', (socket) => {
     // Welcome Message on establishing connection
     entry = new IntentHistoryItem("CONN","WelConnection-I","WELCOME-MSG");
     eventLogger.addItem(socket.id, entry)
-    // Increment Step
-    stepInPortal++;
-    
+    // Increment workflowStep
+    workflowStep = 1;
     socketIO.emit("messageResponse", {
-    text: recipeCorpus.welcomeMsg(),
+    text: workflowStep+" | "+recipeCorpus.welcomeMsg(),
     name: "AI Agent",
     id: Math.random(),
     socketID: socketIO.id
     })
-    
+
     
     socket.on("messageDisplay", data => {
         console.log("Socket to be responded: " + socket.id);
@@ -96,40 +119,65 @@ socketIO.on('connection', (socket) => {
     
     socket.on("message", data => {
         let replyto = socket.id;
-        let intentMap = new Map();
-        let recipes="";
-        intentMap = intentCorpus.extractIntentsFromText(data.text);
-        console.log("Identified ",intentMap.keys());
-        recipes = "We have identified following Recipes ";
-        if (intentMap.size > 0){
-            recipes = "We have identified following Recipes ";
-            for (let key of intentMap.keys()) {
+        let responseMessage=""
+        //Check Workflow Step
+        if (workflowStep == 1){
+            // Present Recipes
+            let intentMap = new Map();
+            let recipes="";
+            intentMap = intentCorpus.extractIntentsFromText(data.text);
+            recipes = "";
+            if (intentMap.size > 0){
+                //Increment Step
+                workflowStep = 2;
 
-                recipes= recipes+intentCorpus.intentRecipies.get(key);
-                // Get Flags associated with these recipes
-
+                recipes = workflowStep+" | "+"We have identified following Recipes  ";
+                for (let key of intentMap.keys()) {
+                    // Get Flags associated with these recipes
+                    let rcpArray = (intentCorpus.intentRecipies.get(key));
+                    rcpList = rcpArray;
+                    recipes=recipes+ " "+rcpArray;
+                }
+                respondBack=true;
             }
-            stepInPortal++;
-            isRecipeDelivered=true;
+            else{
+                recipes = "Sorry, we could not identify any recipes matching your criteria, please refine search.";
+            }
+        responseMessage = recipes;
+
+        }
+        else if (workflowStep==3){
+            //processing time input received
+            // Complex  Call for processing
+            workflowStep=4;
+            // Extract Cooking Time from Input and pass it to prepareMessage
+            responseMessage=prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
+            respondBack=true;
+
+        }
+        else if (workflowStep==6){
+            // Extract Cooking Time from Input and pass it to prepareMessage
+            responseMessage=prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
             respondBack=true;
         }
-        else{
-            recipes = "Sorry, we could not identify any recipes matching your criteria, please refine search.";
-        }
-        
+
         socketIO.to(replyto).emit("messageResponse", {
-        text: recipes,
+        text: responseMessage,
         name: "AI Agent",
         id: data.id,
         socketID: data.socketID
         })
         triggerResponse =true;
         if (triggerResponse=true){
-            triggerResponse =false;
-            let msg = "So do you have any health concerns?" +
-                "We have diabetic-friendly, gluten-free " +
-                "& low cholesterol recipes as well, " +
-                "Time explore ..."
+            if (workflowStep=2){
+                workflowStep = 3;
+                // Simple Processing
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                triggerResponse=true;
+
+            }
+
+
             socketIO.to(replyto).emit("messageResponseCont", {
                 text: msg,
                 name: "AI Agent",
@@ -138,6 +186,7 @@ socketIO.on('connection', (socket) => {
             })
 
         }
+
 
     })
 

@@ -4,7 +4,7 @@
   "data": [
     {
       "id": 1,
-      "recipeNames":["Cabbage Fat-Burning Soup ","Grilled Fruit and Vegetable Kabobs","Vegetarian Moussaka"] ,
+      "recipeNames":["Cabbage Fat-Burning Soup","Grilled Fruit and Vegetable Kabobs","Vegetarian Moussaka"] ,
       "intent": "vegetarian-food",
       "keywords": [
         "vegetarian",
