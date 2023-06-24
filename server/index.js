@@ -95,6 +95,23 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
         message =workflowStep+" | "+"Would you like to view the ingredients of above Recipe. Choose 1 for Yes & 2 for No. Please enter corresponding code [Number 1 or 2]"
         
     }
+    else if (workflowStep == 8){
+        // Complex
+        // Iterate
+        let ingList = [];
+        for (let i = 0; i < recpList.length; i++) {
+            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+            ingList = map.get("recipeIngredients");
+            message = "Here are ingredients ";
+            // Iterate Ingredients
+            for (let i =0; i< ingList.length; i++){
+                // Add from list
+                message = message+" |  "+ingList[i]["ingredient"]["ingredientName"];
+                
+            }
+           
+        }
+    }
     return message;
 
 }
@@ -185,6 +202,12 @@ socketIO.on('connection', (socket) => {
             respondBack=true;
 
         }
+        else if (workflowStep == 7){
+            workflowStep=8;
+            // Extract ingredients of Recipes  
+            responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
+            respondBack=true;
+        }
 
         socketIO.to(replyto).emit("messageResponse", {
         text: responseMessage,
@@ -210,6 +233,12 @@ socketIO.on('connection', (socket) => {
             else if (workflowStep == 6){
                 workflowStep=7;
                 //Simple Processing , ask for ingredients
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                triggerResponse=true;
+            }
+            else if (workflowStep == 8){
+                workflowStep=9;
+                //Simple Processing , ask for portions of ingredients
                 msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
                 triggerResponse=true;
             }
