@@ -70,21 +70,29 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     }
     else if (workflowStep == 5 ){
         // Simple
-        message =workflowStep+" | "+"Would you like instead go for an easy, moderate or a difficult recipe ?"
+        message =workflowStep+" | "+"Would you like instead go Difficulty Level for an Easy: 1, Moderate:2 or a Difficult:3 recipe?. Please enter corresponding code [Number 1-3]"
     }
     else if (workflowStep == 6 ){
         // Complex
-        //Complexity time received
-        
+        //Difficulty Level  [Easy : 1, Moderate:2, Difficult:3]
+        let diffMap = new Map();
+        diffMap.set("EASY",1);
+        diffMap.set("MODERATE",2);
+        diffMap.set("HARD",3);
         message = workflowStep+" | "+"Here are Recipes Matching Your Cooking Difficulty Level ";
         // Iterate
         for (let i = 0; i < recpList.length; i++) {
             let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
             extractedComplexity = map.get("difficulty");
-            if (extractedComplexity == addData){
+            if (diffMap.get(extractedComplexity) == addData){
                 message = message+ map.get("recipeName");
             }
         }
+        
+    }
+    else if (workflowStep ==7){
+        // Simple
+        message =workflowStep+" | "+"Would you like to view the ingredients of above Recipe. Choose 1 for Yes & 2 for No. Please enter corresponding code [Number 1 or 2]"
         
     }
     return message;
@@ -173,7 +181,9 @@ socketIO.on('connection', (socket) => {
         else if (workflowStep==5){
             workflowStep=6;
             // Extract Complexity calculation from Input and pass it to prepareMessage
-            responseMessage=prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
+            responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
+            respondBack=true;
+
         }
 
         socketIO.to(replyto).emit("messageResponse", {
@@ -191,13 +201,17 @@ socketIO.on('connection', (socket) => {
                 triggerResponse=true;
 
             }
-            if (workflowStep == 4){
+            else if (workflowStep == 4){
                 workflowStep=5;
                 //Simple Processing , ask for complexity
                 msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
                 triggerResponse=true;
-
-
+            }
+            else if (workflowStep == 6){
+                workflowStep=7;
+                //Simple Processing , ask for ingredients
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                triggerResponse=true;
             }
 
 
