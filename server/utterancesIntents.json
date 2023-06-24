@@ -11,7 +11,8 @@
         "without meat",
         "without red meat",
         "veg",
-        "no meat"
+        "no meat",
+        "Vegetarean"
       ],
       "answer": {
         "returns": "recipeName",
@@ -68,7 +69,8 @@
         "without beef",
         "without red meat",
         "no red meat",
-        "vegetarian"
+        "vegetarian",
+        "vegetarean"
       ],
       "answer": {
         "returns": "recipeName",

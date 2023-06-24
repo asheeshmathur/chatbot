@@ -124,6 +124,36 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
 
         }
     }
+    else if (workflowStep == 10) {
+        // Complex
+        // Iterate
+        let ingList = [];
+        for (let i = 0; i < recpList.length; i++) {
+            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+            ingList = map.get("recipeIngredients");
+            message = workflowStep + " | " + "Here are ingredients with Portion Details ";
+            // Iterate Ingredients
+            for (let i = 0; i < ingList.length; i++) {
+                // Add from list
+                message = message + " |  " + ingList[i]["ingredient"]["ingredientName"] + "  "+ ingList[i]["proportionValue"] + " " + ingList[i]["proportionUnit"];
+                console.log("OSSD");
+
+            }
+        }
+    }
+    else if (workflowStep == 11){
+        // Simple
+        // Iterate
+        let ingList = [];
+        for (let i = 0; i < recpList.length; i++) {
+            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+            let servesPersons = map.get("servings");
+            message = workflowStep+" | "+"This recipe serves : "+servesPersons;
+            message = message+"These proportions will serve… people. I would suggest you to scale  & adjust proportions size accordingly.";
+
+        }
+    }
+
 
     return message;
 
@@ -261,6 +291,13 @@ socketIO.on('connection', (socket) => {
                 msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
                 triggerResponse=true;
             }
+            else if (workflowStep == 10){
+                workflowStep=11;
+                //Simple Processing , ask for portions of ingredients
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                triggerResponse=true;
+            }
+            
 
 
             socketIO.to(replyto).emit("messageResponseCont", {
