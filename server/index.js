@@ -102,7 +102,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
         for (let i = 0; i < recpList.length; i++) {
             let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
             ingList = map.get("recipeIngredients");
-            message = "Here are ingredients ";
+            message = workflowStep+" | "+"Here are ingredients ";
             // Iterate Ingredients
             for (let i =0; i< ingList.length; i++){
                 // Add from list
@@ -112,6 +112,19 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
            
         }
     }
+    else if (workflowStep == 9){
+        // Simple
+        // Iterate
+        let ingList = [];
+        for (let i = 0; i < recpList.length; i++) {
+            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+            let servesPersons = map.get("servings");
+            message = workflowStep+" | "+"This recipe serves : "+servesPersons;
+            message = message+"Would you like to view it's Proportion Value & Unit of its ingredients. For Yes [1] & for No [2]. Your choices please [Number 1 or 2]"
+
+        }
+    }
+
     return message;
 
 }
@@ -205,6 +218,12 @@ socketIO.on('connection', (socket) => {
         else if (workflowStep == 7){
             workflowStep=8;
             // Extract ingredients of Recipes  
+            responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
+            respondBack=true;
+        }
+        else if (workflowStep == 9){
+            workflowStep=10;
+            // Extract ingredients of Recipes  Portions
             responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
             respondBack=true;
         }
