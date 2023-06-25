@@ -227,8 +227,10 @@ socketIO.on('connection', (socket) => {
                 respondBack=true;
             }
             else{
-                recipes = "Sorry, we could not identify any recipes matching your criteria, please refine search.";
-                noMatchFlag = true;
+                "Sorry, we could not identify any recipes matching your criteria, please refine search.";
+                workflowStep = 1;
+                recipes = "No Matching Recipe";
+
             }
         responseMessage = recipes;
 
@@ -282,6 +284,12 @@ socketIO.on('connection', (socket) => {
         })
         // Generate messages to be displayed
         if (triggerResponse=true){
+            if (workflowStep ==1){
+                msg = "Sorry we could not identify and recipe now, maching your choice";
+                msg = msg + " Please Try Again";
+               // workflowStep = 2;
+            }
+
             if (workflowStep == 2){
                 workflowStep = 3;
                 // Simple Processing
