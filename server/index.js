@@ -16,12 +16,13 @@ const IntentCorpus = require("./IntentCorpus.js");
 
 // Reference to Recipe Corpus
 const RecipeCorpus = require("./RecipeCorpus.js");
+
 const {Socket} = require("socket.io");
 
 // Instantiate Recipe Corpus
 const recipeCorpus = new RecipeCorpus("./data.json");
 
-// Instantiate Recipe Corpus
+// Instantiate Intent Corpus
 const intentCorpus = new IntentCorpus("./utterancesIntents.json");
 
 // Set Socket IO
@@ -33,127 +34,121 @@ const socketIO = require('socket.io')(http, {
 });
 //To keep track of all connected users
 let sockets = [];
-let continuationFlag = false;
-
-console.log(`Ready to Serve`);
 
 // Logger for all socket events between client & server
 let eventLogger = new EventLogger();
 
 //Initializing various parameters
 let users = []
-let retAnswer ="";
-let recipeId= -1;
+//List of Recipes
 let rcpList="";
 
+// Prepares messages as per workflow step
+// All messages should be externalised in json file
 function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     let message="";
-    if (workflowStep == 3){
-        // Simple
-        // Recipes served
-        message = workflowStep+" | "+"Sure, how much cooking time (in minutes) do you have ? Please enter a numeric figure only "
-    }
-    else if (workflowStep==4){
-        // Complex
-        //Cooking time received
-        cookingTime = addData;
-        let extractedCkTime =0
-        message = workflowStep+" | "+"Here are Recipes Matching Your Cooking Time ";
-        // Iterate
-        for (let i = 0; i < recpList.length; i++) {
-            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-            extractedCkTime = map.get("prepTime")+map.get("cookingTime");
-            if (extractedCkTime <= addData){
-                message = message+ map.get("recipeName");
-            }
-        }
-    }
-    else if (workflowStep == 5 ){
-        // Simple
-        message =workflowStep+" | "+"Would you like instead go Difficulty Level for an Easy: 1, Moderate:2 or a Difficult:3 recipe?. Please enter corresponding code [Number 1-3]"
-    }
-    else if (workflowStep == 6 ){
-        // Complex
-        //Difficulty Level  [Easy : 1, Moderate:2, Difficult:3]
-        let diffMap = new Map();
-        diffMap.set("EASY",1);
-        diffMap.set("MODERATE",2);
-        diffMap.set("HARD",3);
-        message = workflowStep+" | "+"Here are Recipes Matching Your Cooking Difficulty Level ";
-        // Iterate
-        for (let i = 0; i < recpList.length; i++) {
-            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-            extractedComplexity = map.get("difficulty");
-            if (diffMap.get(extractedComplexity) == addData){
-                message = message+ map.get("recipeName");
-            }
-        }
-        
-    }
-    else if (workflowStep ==7){
-        // Simple
-        message =workflowStep+" | "+"Would you like to view the ingredients of above Recipe. Choose 1 for Yes & 2 for No. Please enter corresponding code [Number 1 or 2]"
-        
-    }
-    else if (workflowStep == 8){
-        // Complex
-        // Iterate
-        let ingList = [];
-        for (let i = 0; i < recpList.length; i++) {
-            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-            ingList = map.get("recipeIngredients");
-            message = workflowStep+" | "+"Here are ingredients ";
-            // Iterate Ingredients
-            for (let i =0; i< ingList.length; i++){
-                // Add from list
-                message = message+" |  "+ingList[i]["ingredient"]["ingredientName"];
-                
-            }
-           
-        }
-    }
-    else if (workflowStep == 9){
-        // Simple
-        // Iterate
-        let ingList = [];
-        for (let i = 0; i < recpList.length; i++) {
-            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-            let servesPersons = map.get("servings");
-            message = workflowStep+" | "+"This recipe serves : "+servesPersons;
-            message = message+"Would you like to view it's Proportion Value & Unit of its ingredients. For Yes [1] & for No [2]. Your choices please [Number 1 or 2]"
+    switch (workflowStep) {
+        case 3:
+            // Filter Recipes based on cooking time
+            message = workflowStep + " | " + "Good, how much cooking time (in minutes) you have in mind in Minutes. ? Please enter a Number ";
+            break;
 
-        }
-    }
-    else if (workflowStep == 10) {
-        // Complex
-        // Iterate
-        let ingList = [];
-        for (let i = 0; i < recpList.length; i++) {
-            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-            ingList = map.get("recipeIngredients");
-            message = workflowStep + " | " + "Here are ingredients with Portion Details ";
-            // Iterate Ingredients
-            for (let i = 0; i < ingList.length; i++) {
-                // Add from list
-                message = message + " |  " + ingList[i]["ingredient"]["ingredientName"] + "  "+ ingList[i]["proportionValue"] + " " + ingList[i]["proportionUnit"];
-                console.log("OSSD");
+        case 4:
+            //Cooking time received
+            cookingTime = addData;
+            let extractedCkTime = 0
+            message = workflowStep + " | " + "Here are Recipes Matching Your Cooking Time ";
+            // Iterate
+            for (let i = 0; i < recpList.length; i++) {
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                extractedCkTime = map.get("prepTime") + map.get("cookingTime");
+                if (extractedCkTime <= addData) {
+                    message = message + map.get("recipeName");
+                }
+            }
+            break;
+        case 5:
+            message = workflowStep + " | " + "Filter recipes based its Difficulty Level. Easy: [1], Moderate:[2] ,Difficult:[3] . Enter corresponding code [Number 1-3]";
+            break;
+        case 6:
+            //Difficulty Level  [Easy : 1, Moderate:2, Difficult:3]
+            let diffMap = new Map();
+            diffMap.set("EASY", 1);
+            diffMap.set("MODERATE", 2);
+            diffMap.set("HARD", 3);
+            message = workflowStep + " | " + "Here are Recipes Matching Your Cooking Difficulty Level ";
+            // Iterate
+            for (let i = 0; i < recpList.length; i++) {
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                extractedComplexity = map.get("difficulty");
+                if (diffMap.get(extractedComplexity) == addData) {
+                    message = message + map.get("recipeName");
+                }
+            }
+            break;
+        case 7:
+            message = workflowStep + " | " + "Would you like to view the ingredients of above Recipe. Choose 1 for Yes & 2 for No. Please enter corresponding code [Number 1 or 2]";
+            break;
+        case 8:
+
+            let ingredientList = [];
+            for (let i = 0; i < recpList.length; i++) {
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                ingredientList = map.get("recipeIngredients");
+                message = workflowStep + " | " + "Here are ingredients ";
+                // Iterate Ingredients
+                for (let i = 0; i < ingredientList.length; i++) {
+                    // Add from list
+                    message = message + " |  " + ingredientList[i]["ingredient"]["ingredientName"];
+
+                }
+            }
+            break;
+        case 9:
+            for (let i = 0; i < recpList.length; i++) {
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                message = workflowStep + " | " + "This recipe is for  : " + map.get("servings");
+                message = message +
+                    ` Servings, Would you like to view it's Proportion Value & Unit of ingredients. Press [1] : Yes  & [2]: No  Your choices please [Number 1 or 2]`;
+            }
+            break;
+        case 10:
+            let ingList = [];
+            for (let i = 0; i < recpList.length; i++) {
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                ingList = map.get("recipeIngredients");
+                message = workflowStep + " | " + "Here are ingredients with Portion Details ";
+                // Iterate Ingredients
+                for (let i = 0; i < ingList.length; i++) {
+                    // Add from list
+                    message = message + " |  " + ingList[i]["ingredient"]["ingredientName"] + "  " + ingList[i]["proportionValue"] + " " + ingList[i]["proportionUnit"];
+
+                }
+            }
+            break;
+        case 11:
+            for (let i = 0; i < recpList.length; i++) {
+                message="";
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                let detailedRecipe =map.get("recipeDescription");
+                message = workflowStep +" |  " + detailedRecipe;
+            }
+            break;
+            
+        case 13:
+            for (let i = 0; i < recpList.length; i++) {
+                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                let servesPersons = map.get("servings");
+                message = workflowStep + " | " + "This recipe serves : " + servesPersons;
+                message = message + "These proportions will serve… people. I would suggest you to scale  & adjust proportions size accordingly.";
 
             }
-        }
-    }
-    else if (workflowStep == 11){
-        // Simple
-        // Iterate
-        let ingList = [];
-        for (let i = 0; i < recpList.length; i++) {
-            let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-            let servesPersons = map.get("servings");
-            message = workflowStep+" | "+"This recipe serves : "+servesPersons;
-            message = message+"These proportions will serve… people. I would suggest you to scale  & adjust proportions size accordingly.";
+            break;
 
-        }
+        default:
+            // yet to come
+            break;
     }
-
 
     return message;
 
@@ -163,29 +158,24 @@ socketIO.on('connection', (socket) => {
     let workflowStep = 0;
     let respondBack = false;
     let triggerResponse= false;
+    let noMatchFlag = false;
 
-    
-    // Add its record in map,
-    entry = new IntentHistoryItem("CONN","REQ","None");
-    eventLogger.addItem(socket.id,entry)
     console.log(`⚡: ${socket.id} user just connected!`)
-    // Emit the connected users when a new socket connects
-    let sock = socket.id;
-    sockets.push(sock);
+
+    // Add user/socket in list
+    sockets.push(socket.id);
     
     // Welcome Message on establishing connection
-    entry = new IntentHistoryItem("CONN","WelConnection-I","WELCOME-MSG");
-    eventLogger.addItem(socket.id, entry)
-    // Increment workflowStep
+    // Start workflowStep
     workflowStep = 1;
+
     socketIO.emit("messageResponse", {
     text: workflowStep+" | "+recipeCorpus.welcomeMsg(),
     name: "AI Agent",
     id: Math.random(),
     socketID: socketIO.id
     })
-
-    
+    //Reverts message back to chatbot
     socket.on("messageDisplay", data => {
         console.log("Socket to be responded: " + socket.id);
         let replyto = socket.id;
@@ -202,8 +192,10 @@ socketIO.on('connection', (socket) => {
     
     socket.on("message", data => {
         let replyto = socket.id;
-        let responseMessage=""
-        //Check Workflow Step
+        // Message to be displayed
+
+        let responseMessage="";
+        // Workflow of the Chatbot
         if (workflowStep == 1){
             // Present Recipes
             let intentMap = new Map();
@@ -211,9 +203,8 @@ socketIO.on('connection', (socket) => {
             intentMap = intentCorpus.extractIntentsFromText(data.text);
             recipes = "";
             if (intentMap.size > 0){
-                //Increment Step
+                //Increment Step only if no errors
                 workflowStep = 2;
-
                 recipes = workflowStep+" | "+"We have identified following Recipes  ";
                 for (let key of intentMap.keys()) {
                     // Get Flags associated with these recipes
@@ -225,11 +216,14 @@ socketIO.on('connection', (socket) => {
             }
             else{
                 recipes = "Sorry, we could not identify any recipes matching your criteria, please refine search.";
+                noMatchFlag = true;
             }
         responseMessage = recipes;
 
         }
         else if (workflowStep==3){
+            //Increment Step only if no errors
+
             //processing time input received
             // Complex  Call for processing
             workflowStep=4;
@@ -239,6 +233,8 @@ socketIO.on('connection', (socket) => {
 
         }
         else if (workflowStep==5){
+            // Received Processing time from user - change step
+            //Increment Step only if no errors
             workflowStep=6;
             // Extract Complexity calculation from Input and pass it to prepareMessage
             responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
@@ -246,6 +242,7 @@ socketIO.on('connection', (socket) => {
 
         }
         else if (workflowStep == 7){
+            // Received Difficulty Level from user
             workflowStep=8;
             // Extract ingredients of Recipes  
             responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
@@ -253,7 +250,13 @@ socketIO.on('connection', (socket) => {
         }
         else if (workflowStep == 9){
             workflowStep=10;
-            // Extract ingredients of Recipes  Portions
+            // Extract ingredients of Recipes with Portions & Units
+            responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
+            respondBack=true;
+        }
+        else if (workflowStep == 10){
+            workflowStep=11;
+            // Extract ingredients of Recipes with Portions & Units
             responseMessage = prepareMessage(workflowStep,rcpList,recipeCorpus,data.text);
             respondBack=true;
         }
@@ -265,6 +268,7 @@ socketIO.on('connection', (socket) => {
         socketID: data.socketID
         })
         triggerResponse =true;
+        // Generate messages to be displayed
         if (triggerResponse=true){
             if (workflowStep == 2){
                 workflowStep = 3;
@@ -297,8 +301,6 @@ socketIO.on('connection', (socket) => {
                 msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
                 triggerResponse=true;
             }
-            
-
 
             socketIO.to(replyto).emit("messageResponseCont", {
                 text: msg,
@@ -308,8 +310,6 @@ socketIO.on('connection', (socket) => {
             })
 
         }
-
-
     })
 
     socket.on('disconnect', () => {
