@@ -102,8 +102,8 @@ class RecipeCorpus {
     welcomeMsg(){
 
         return "Welcome to the World of Yummy Recipes. " +
-            "Are you in the mood to eat Vegetarian, Non " +
-            "Vegetarian or Vegan" ;
+            "Are you in the mood to explore Vegetarian, Non " +
+            "Vegetarian, Vegan , Breakfast, Gluten & Meat Free, World Cuisine, Diabetic Friendly, Pasta, Noodles, Appetizer, Snacks, Drinks, Salad, Sea Food, Poultry ,Brunch and much more. Please tell us your choice to start your journey " ;
 
 
     }
@@ -158,6 +158,17 @@ class RecipeCorpus {
         let details =""
         details =this.intentAnswers.get(key)
         return details;
+    }
+
+    // Get All Details of a recipe by its name
+    getRecipeDetailsByName(recipeName){
+        for (let i =0; i<this.corpus.length;i++){
+            if(this.corpus[i]["recipeName"] == recipeName)
+            {
+                return new Map(Object.entries(this.corpus[i]));
+
+            }
+        }
     }
     // Get Recipe Names based on Recipe Category
     getRecipeId(recipeCategory) {
