@@ -127,12 +127,24 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             }
             break;
         case 11:
+
             for (let i = 0; i < recpList.length; i++) {
                 message="";
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
                 let detailedRecipe =map.get("recipeDescription");
-                message = workflowStep +" |  " + detailedRecipe;
+                message = workflowStep +" |  " + detailedRecipe+
+                "-------------[These recipes & Ingrdients are as per serving size specified"+
+                         "You can adjust and alter these as per you"+
+                "Wishing you Good Luck ...with your adventures"+
+                "Thanks for using these services ...drop us an email at  --for your Feedback & Suggestions";
+                 
             }
+            break;
+        case 12:
+                message="These recipes & Ingrdients are as per serving size specified"+
+                         "You can adjust and alter these as per you"+
+                "Wishing you Good Luck ...with your adventures"+
+                "Thanks for using these services ...drop us an email at  --for your Feedback & Suggestions";
             break;
             
         case 13:
@@ -261,13 +273,13 @@ socketIO.on('connection', (socket) => {
             respondBack=true;
         }
 
+
         socketIO.to(replyto).emit("messageResponse", {
         text: responseMessage,
         name: "AI Agent",
         id: data.id,
         socketID: data.socketID
         })
-        triggerResponse =true;
         // Generate messages to be displayed
         if (triggerResponse=true){
             if (workflowStep == 2){
@@ -297,10 +309,17 @@ socketIO.on('connection', (socket) => {
             }
             else if (workflowStep == 10){
                 workflowStep=11;
-                //Simple Processing , ask for portions of ingredients
+                //Simple Processing , recipe details
                 msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
                 triggerResponse=true;
             }
+            else if (workflowStep == 11){
+                workflowStep=12;
+                //Simple Processing , last message
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                triggerResponse=true;
+            }
+
 
             socketIO.to(replyto).emit("messageResponseCont", {
                 text: msg,
@@ -308,6 +327,17 @@ socketIO.on('connection', (socket) => {
                 id: data.id,
                 socketID: data.socketID
             })
+
+            // Not Working
+            if(workflowStep ==11 && triggerResponse==true ){
+                msg =  prepareMessage(workflowStep,rcpList,recipeCorpus,"");
+                socketIO.to(replyto).emit("messageResponseCont", {
+                    text: msg,
+                    name: "AI Agent",
+                    id: data.id,
+                    socketID: data.socketID
+                })
+            }
 
         }
     })
