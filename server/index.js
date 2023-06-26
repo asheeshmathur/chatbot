@@ -6,11 +6,6 @@ const http = require('http').Server(app);
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000
 
-
-const IntentHistoryItem = require("./IntentHistoryItem.js");
-const IntentHistoryStack = require("./IntentHistoryStack.js");
-const EventLogger = require("./EventLogger.js");
-
 // Reference to Utterances and Intent Corpus
 const IntentCorpus = require("./IntentCorpus.js");
 
@@ -36,9 +31,6 @@ const socketIO = require('socket.io')(http, {
 let socketsWorkflowMap = new Map();
 let workflowStep = 0;
 
-// Logger for all socket events between client & server
-let eventLogger = new EventLogger();
-
 //Initializing various parameters
 let users = []
 //List of Recipes
@@ -48,6 +40,8 @@ let rcpList="";
 // All messages should be externalised in json file
 function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     let message="";
+    let continueMsg = "  Press any key to continue journey";
+
     switch (workflowStep) {
         case 3:
             // Filter Recipes based on cooking time
@@ -68,7 +62,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     message = message +" "+j+" . "+ map.get("recipeName");
                 }
             }
-            message = message+" Press any key to continue";
+            message = message+continueMsg;
 
             break;
         case 5:
@@ -84,12 +78,13 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             // Iterate
             for (let i = 0; i < recpList.length; i++) {
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                let j = i+1;
                 extractedComplexity = map.get("difficulty");
                 if (diffMap.get(extractedComplexity) == addData) {
-                    message = message + map.get("recipeName");
+                    message = message +j+ ". "+map.get("recipeName");
                 }
             }
-            message=message+" Press any key to continue explorations"
+            message=message+continueMsg;
 
             break;
         case 7:
@@ -107,7 +102,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     message = message + " |  " + ingredientList[i]["ingredient"]["ingredientName"];
 
                 }
-                message=message+" Press any key to continue"
+                message=message+continueMsg;
             }
             break;
         case 9:
@@ -130,7 +125,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     message = message + " |  " + ingList[i]["ingredient"]["ingredientName"] + "  " + ingList[i]["proportionValue"] + " " + ingList[i]["proportionUnit"];
 
                 }
-                message=message+ " Press any key to continue";
+                message=message+ continueMsg;
             }
             break;
         case 11:
@@ -214,15 +209,19 @@ socketIO.on('connection', (socket) => {
                 if (intentMap.size > 0){
                     //Increment Step only if no errors
                     socketsWorkflowMap.set(socketId,2);
+                    workflowStep=workflowStep+1;
 
                     recipes = workflowStep+" | "+"We have identified following Recipes  ";
+                    let j =1;
                     for (let key of intentMap.keys()) {
+
                         // Get Flags associated with these recipes
                         let rcpArray = (intentCorpus.intentRecipies.get(key));
                         rcpList = rcpArray;
-                        recipes=recipes +" "+rcpArray;
+                        recipes=recipes +" " +j+" . "+rcpArray;
+                        j++;
                     }
-                    recipes=recipes+" [Press Any Key To Continue ]"
+                    recipes=recipes+" Press Any Key To Continue "
 
                 }
                 else{
