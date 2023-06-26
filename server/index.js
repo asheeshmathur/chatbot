@@ -127,9 +127,10 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                 // Iterate Ingredients
                 for (let i = 0; i < ingList.length; i++) {
                     // Add from list
-                    message = message + " |  " + ingList[i]["ingredient"]["ingredientName"] + "  " + ingList[i]["proportionValue"] + " " + ingList[i]["proportionUnit"]+ " Press any key to continue";
+                    message = message + " |  " + ingList[i]["ingredient"]["ingredientName"] + "  " + ingList[i]["proportionValue"] + " " + ingList[i]["proportionUnit"];
 
                 }
+                message=message+ " Press any key to continue";
             }
             break;
         case 11:
@@ -196,6 +197,8 @@ socketIO.on('connection', (socket) => {
             })
 
     }); //message display
+
+    // Function to Manage Workflow
     function processWorkFlow(socketsWorkflowMap,socketId,data){
         let recipeList = []
         // Workflow of the Chatbot
@@ -303,7 +306,6 @@ socketIO.on('connection', (socket) => {
                 return responseMessage;
                 break;
             case 8:
-                // Received Difficulty Level from user
                 socketsWorkflowMap.set(socketId,9);
 
                 // Extract ingredients of Recipes
@@ -318,14 +320,16 @@ socketIO.on('connection', (socket) => {
                 break;
             case 10:
                 socketsWorkflowMap.set(socketId,11);
-                // Extract ingredients of Recipes with Portions & Units
+                // Extract Recipes
                 responseMessage = prepareMessage(11,rcpList,recipeCorpus,data.text);
                 return responseMessage;
                 break;
             case 11:
                 socketsWorkflowMap.set(socketId,12);
-                // Extract ingredients of Recipes with Portions & Units
+                // End of Workflow
                 responseMessage = prepareMessage(12,rcpList,recipeCorpus,data.text);
+                // Set workflow step to 1
+                socketsWorkflowMap.set(socketId,0);
                 return responseMessage;
                 break;
         }// Switch End
