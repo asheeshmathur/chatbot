@@ -43,13 +43,19 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     let continueMsg = "  Enter 'c' or any key in text box below to continue your journey";
 
     switch (workflowStep) {
+        case 1:
+            // Start Over
+            message= workflowStep+" | "+recipeCorpus.welcomeMsg();
+            break;
+
         case 3:
-            // Filter Recipes based on cooking time
+            // Message to receive  on cooking time
             message = workflowStep + " | " + "Good, how much cooking time (in minutes) you have in mind in Minutes. ? Please enter a Number ";
             break;
 
         case 4:
-            //Cooking time received
+            //Cooking time received, filter result based on cooking time
+            // Combination of Preparation & Cooking time
             cookingTime = addData;
             let extractedCkTime = 0
             message = workflowStep + " | " + "Here are Recipes Matching Your Cooking Time ";
@@ -63,13 +69,13 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                 }
             }
             message = message+continueMsg;
-
             break;
         case 5:
+            // Message to enter difficulty Level
             message = workflowStep + " | " + "Filter recipes based its Difficulty Level. Easy: [1], Moderate:[2] ,Difficult:[3] . Enter corresponding code [Number 1-3]";
             break;
         case 6:
-            //Difficulty Level  [Easy : 1, Moderate:2, Difficult:3]
+            //Difficulty Level  submitted , filter accordingly [Easy : 1, Moderate:2, Difficult:3]
             let diffMap = new Map();
             diffMap.set("EASY", 1);
             diffMap.set("MODERATE", 2);
@@ -88,9 +94,11 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
 
             break;
         case 7:
+            // Meesage to prompt for ingredients
             message = workflowStep + " | " + "View the ingredients of above Recipe. Enter 'c' or any other key to continue";
             break;
         case 8:
+            // Display Ingredients
             let ingredientList = [];
             for (let i = 0; i < recpList.length; i++) {
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
@@ -100,12 +108,13 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                 for (let i = 0; i < ingredientList.length; i++) {
                     // Add from list
                     message = message + " |  " + ingredientList[i]["ingredient"]["ingredientName"];
-
                 }
                 message=message+continueMsg;
             }
             break;
         case 9:
+
+            // Message to look at proportion level
             for (let i = 0; i < recpList.length; i++) {
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
                 message = workflowStep + " | " + "This recipe is for  : " + map.get("servings");
@@ -114,6 +123,8 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             }
             break;
         case 10:
+
+            // Pick recipe Ingrdients with proportions
             let ingList = [];
             for (let i = 0; i < recpList.length; i++) {
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
@@ -129,6 +140,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             }
             break;
         case 11:
+            // Display Recipe description
 
             for (let i = 0; i < recpList.length; i++) {
                 message="";
@@ -143,6 +155,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             }
             break;
         case 12:
+            //message to continue from start
             message="To continue Exploring this Cornucopia "+continueMsg+"....";
             break;
 
@@ -214,12 +227,10 @@ socketIO.on('connection', (socket) => {
                     recipes = workflowStep+" | "+"We have identified following Recipes  ";
                     let j =1;
                     for (let key of intentMap.keys()) {
-
                         // Get Flags associated with these recipes
                         let rcpArray = (intentCorpus.intentRecipies.get(key));
                         rcpList = rcpArray;
-                        recipes=recipes +" " +j+" . "+rcpArray;
-                        j++;
+                        recipes=recipes +" " +rcpArray;
                     }
                     recipes=recipes+" Enter any key to continue. "
 
@@ -227,7 +238,7 @@ socketIO.on('connection', (socket) => {
                 else{
                     socketsWorkflowMap.set(socketId,1);
                     workflowStep = 1;
-                    recipes = "No Matching Recipe, Try other Options ";
+                    recipes = "No Matching Recipe found, Try other Options ";
                     isError = true;
                 }
                 responseMessage = recipes;
@@ -249,7 +260,6 @@ socketIO.on('connection', (socket) => {
                     socketsWorkflowMap.set(socketId,3);
                     responseMessage = "Enter Valid Numeric Values";
                     isError = true;
-                    console.log("After Analysing: Input Error");
                 }
                 else{
                     //processing time input received
@@ -315,12 +325,17 @@ socketIO.on('connection', (socket) => {
                 responseMessage = prepareMessage(11,rcpList,recipeCorpus,data.text);
                 return responseMessage;
                 break;
+
             case 11:
                 socketsWorkflowMap.set(socketId,12);
-                // End of Workflow
                 responseMessage = prepareMessage(12,rcpList,recipeCorpus,data.text);
-                // Set workflow step to 1
-                socketsWorkflowMap.set(socketId,0);
+                return responseMessage;
+                break;
+
+            case 12:
+                socketsWorkflowMap.set(socketId,1);
+                // Extract Recipes
+                responseMessage = prepareMessage(1,rcpList,recipeCorpus,data.text);
                 return responseMessage;
                 break;
         }// Switch End
@@ -343,10 +358,9 @@ socketIO.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
 
-        users = users.filter(user => user.socketID !== socket.id)
+        //Remove logged in UserQA/c
+        socketsWorkflowMap.delete(socket.id);
         //Removing disconnecting socket record
-        eventLogger.removeDetails(socket.id)
-        socketIO.emit("newUserResponse", users)
         socket.disconnect()
     });
 })
