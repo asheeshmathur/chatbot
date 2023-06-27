@@ -25,6 +25,15 @@ const ChatFooter = ({socket}) => {
                     socketID: socket.id
                     }
                 )
+                    socket.emit("messageCont",
+                        {
+                            text: "CONT",
+                            name: localStorage.getItem("userName"),
+                            id: `${socket.id}${Math.random()}`,
+                            socketID: socket.id
+
+                        });
+                    console.log("Sent  Message Cont")
                 }
                 //Cleans up message list
                 setMessage("")

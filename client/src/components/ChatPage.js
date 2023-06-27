@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef} from 'react'
-import ChatBar from './ChatBar'
 import ChatBody from './ChatBody'
 import ChatFooter from './ChatFooter'
 import socketIO from "socket.io-client";
@@ -9,13 +8,30 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([])
   const [typingStatus, setTypingStatus] = useState("")
   const lastMessageRef = useRef(null);
-    
+
   // Call this function every time there's some change in messages or socket
   useEffect(()=> {
-    socket.on("messageResponse", data => setMessages([...messages, data]))
+    socket.on("messageResponse", data =>
+    {
+      setMessages([...messages, data]);
+    }, function(){
+      console.log("About to Send Acknowledgement");
+      socket.emit("sendContMesg","Oye Oye");
+    })
   }, [messages])
 
-    useEffect(()=> {
+  // Call this function every time there's some change in messages or socket
+  useEffect(()=> {
+    console.log("Cont Message Received");
+    socket.on("messageResponseCont", data => setMessages([...messages, data]))
+  }, [messages])
+
+  // Call this function every time there's some change in messages or socket
+  useEffect(()=> {
+    socket.on("errorMessageResponse", data => setMessages([...messages, data]))
+  }, [messages])
+
+  useEffect(()=> {
         socket.on("messageReplicate", data => setMessages([...messages, data]))
     }, [messages])
 

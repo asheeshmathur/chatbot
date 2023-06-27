@@ -7,7 +7,7 @@ const ChatBody = ({messages, typingStatus, lastMessageRef}) => {
   return (
       <>
         <header className='chat__mainHeader'>
-          <p>Welcome To Cafe</p>
+          <p>Welcome To Recipe Cornucopia</p>
         </header>
 
 
