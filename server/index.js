@@ -40,7 +40,7 @@ let rcpList="";
 // All messages should be externalised in json file
 function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     let message="";
-    let continueMsg = "  Press any key to continue journey";
+    let continueMsg = "  Enter 'c' or any key in text box below to continue your journey";
 
     switch (workflowStep) {
         case 3:
@@ -88,7 +88,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
 
             break;
         case 7:
-            message = workflowStep + " | " + "Would you like to view the ingredients of above Recipe. Choose 1 for Yes & 2 for No. Please enter corresponding code [Number 1 or 2]";
+            message = workflowStep + " | " + "View the ingredients of above Recipe. Enter 'c' or any other key to continue";
             break;
         case 8:
             let ingredientList = [];
@@ -110,7 +110,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
                 message = workflowStep + " | " + "This recipe is for  : " + map.get("servings");
                 message = message +
-                    ` Servings, Would you like to view it's Proportion Value & Unit of ingredients. Press [1] : Yes  & [2]: No  Your choices please [Number 1 or 2]`;
+                    ` Servings, Would you like to view it's Proportion Value & Unit of ingredients. Press C to view`;
             }
             break;
         case 10:
@@ -138,12 +138,12 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     "-------------[These recipes & Ingrdients are as per serving size specified"+
                     "You can adjust and alter these as per you"+
                     "Wishing you Good Luck ...with your adventures"+
-                    "Thanks for using these services ...drop us an email at  --for your Feedback & Suggestions"+ " Press Any Key To Continue Your Journey";
+                    "Thanks for using these services ...drop us an email at  --for your Feedback & Suggestions"+ " Enter Any Key To Continue Your Journey";
 
             }
             break;
         case 12:
-            message="To continue Exploring this Cornucopia  ... Press Any Key";
+            message="To continue Exploring this Cornucopia "+continueMsg+"....";
             break;
 
 
@@ -221,7 +221,7 @@ socketIO.on('connection', (socket) => {
                         recipes=recipes +" " +j+" . "+rcpArray;
                         j++;
                     }
-                    recipes=recipes+" Press Any Key To Continue "
+                    recipes=recipes+" Enter any key to continue. "
 
                 }
                 else{
@@ -272,11 +272,10 @@ socketIO.on('connection', (socket) => {
             case 5:
                 // Received Complexity Number
                 //Increment Step only if no errors
-                if (isNaN(data.text)){
+                if (isNaN(data.text) ){
                     socketsWorkflowMap.set(socketId,5);
                     responseMessage = "Not Valid Numeric [1-3] Value";
                     isError = true;
-                    console.log("After Analysing: Input Error")
                 }
                 else{
                     socketsWorkflowMap.set(socketId,6);
@@ -288,25 +287,18 @@ socketIO.on('connection', (socket) => {
             case 6:
                 socketsWorkflowMap.set(socketId,7);
                 // Received Complexity Number
-                //Increment Step only if no errors
-
-                    socketsWorkflowMap.set(socketId,7);
-                    // Extract Complexity calculation from Input and pass it to prepareMessage
-                    responseMessage = prepareMessage(7,rcpList,recipeCorpus,data.text);
+                //Increment Step only if no errors     // Extract Complexity calculation from Input and pass it to prepareMessage
+                responseMessage = prepareMessage(7,rcpList,recipeCorpus,data.text);
 
                 return responseMessage;
                 break;
             case 7:
-                // Received Difficulty Level from user
                 socketsWorkflowMap.set(socketId,8);
-
-                // Extract ingredients of Recipes
                 responseMessage = prepareMessage(8,rcpList,recipeCorpus,data.text);
                 return responseMessage;
                 break;
             case 8:
                 socketsWorkflowMap.set(socketId,9);
-
                 // Extract ingredients of Recipes
                 responseMessage = prepareMessage(9,rcpList,recipeCorpus,data.text);
                 return responseMessage;
