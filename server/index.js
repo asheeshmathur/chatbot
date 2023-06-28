@@ -40,8 +40,8 @@ let rcpList="";
 // All messages should be externalised in json file
 function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     let message="";
-    let continueMsg = "  Enter 'c' or any key in text box below to continue your journey";
-
+    let continueMsg = "  Enter 'c/C' or any key in text box below to continue";
+    let relevantRecipeList =[]
     switch (workflowStep) {
         case 1:
             // Start Over
@@ -50,7 +50,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
 
         case 3:
             // Message to receive  on cooking time
-            message = workflowStep + " | " + "Good, how much cooking time (in minutes) you have in mind in Minutes. ? Please enter a Number ";
+            message = workflowStep + " | " + "Good, how much cooking time (in minutes) you have in mind in Minutes ? Please enter a Number Only ";
             break;
 
         case 4:
@@ -59,16 +59,25 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             cookingTime = addData;
             let extractedCkTime = 0
             message = workflowStep + " | " + "Here are Recipes Matching Your Cooking Time ";
-            // Iterate
-            for (let i = 0; i < recpList.length; i++) {
-                let j =i+1
-                let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-                extractedCkTime = map.get("prepTime") + map.get("cookingTime");
-                if (extractedCkTime <= addData) {
-                    message = message +" "+j+" . "+ map.get("recipeName");
+            let matchCout = 0;
+            if(recpList.length >0){
+                for (let i = 0; i < recpList.length; i++) {
+                    let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
+                    let j =i+1
+                    extractedCkTime = map.get("prepTime") + map.get("cookingTime");
+                    if (extractedCkTime <= addData) {
+                        message = message +" "+j+" . "+ map.get("recipeName");
+                        relevantRecipeList.push(map.get("recipeName"));
+                        matchCout = matchCout+1;
+                        message = message+continueMsg;
+
+                    }
+                    if (matchCout == 0)
+                    {
+                        message = "No matching Recipe found as per your cooking time. ";
+                    }
                 }
             }
-            message = message+continueMsg;
             break;
         case 5:
             // Message to enter difficulty Level
@@ -81,17 +90,23 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             diffMap.set("MODERATE", 2);
             diffMap.set("HARD", 3);
             message = workflowStep + " | " + "Here are Recipes Matching Your Cooking Difficulty Level ";
-            // Iterate
+            // Iterate and check
             for (let i = 0; i < recpList.length; i++) {
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
                 let j = i+1;
                 extractedComplexity = map.get("difficulty");
                 if (diffMap.get(extractedComplexity) == addData) {
-                    message = message +j+ ". "+map.get("recipeName");
+                    relevantRecipeList.push(map.get("recipeName"))
+                        message = message +j+ ". "+map.get("recipeName");
+                    }
                 }
+            if (relevantRecipeList.length>0)
+            {
+                message=message+continueMsg;
             }
-            message=message+continueMsg;
-
+            else{
+                message = "No Matching Recipes based on Difficulty Level Found, Press 'c/C' to revist choice";
+            }
             break;
         case 7:
             // Meesage to prompt for ingredients
@@ -232,7 +247,7 @@ socketIO.on('connection', (socket) => {
                         rcpList = rcpArray;
                         recipes=recipes +" " +rcpArray;
                     }
-                    recipes=recipes+" Enter any key to continue. "
+                    recipes=recipes+" Press 'c/C' to continue & if you do not want to  cook this and explore other options Press 'q/Q' . "
 
                 }
                 else{
@@ -249,9 +264,20 @@ socketIO.on('connection', (socket) => {
             case 2:
                 // Display StaticMessage as per workflow step
                 // Increment W/F Step
-                socketsWorkflowMap.set(socketId,3);
+                if((data.text=="c") || (data.text=="C")){
+                    socketsWorkflowMap.set(socketId,3);
+                    responseMessage =  prepareMessage(3,rcpList,recipeCorpus,"");
 
-                responseMessage =  prepareMessage(3,rcpList,recipeCorpus,"");
+                }
+                else   if((data.text=="q") || (data.text=="Q")){
+                    socketsWorkflowMap.set(socketId,1);
+                    responseMessage =  workflowStep+" | "+recipeCorpus.welcomeMsgRepeat();
+                }
+                else{
+                    responseMessage = "Wrong Choice, Please try again";
+                    socketsWorkflowMap.set(socketId,2);
+
+                }
                 return responseMessage;
                 break;
             case 3:
@@ -261,7 +287,7 @@ socketIO.on('connection', (socket) => {
                     responseMessage = "Enter Valid Numeric Values";
                     isError = true;
                 }
-                else{
+                else {
                     //processing time input received
                     // Complex  Call for processing
                     socketsWorkflowMap.set(socketId,4);
@@ -273,9 +299,17 @@ socketIO.on('connection', (socket) => {
 
             case 4:
                 // Complex  Call for processing
-                socketsWorkflowMap.set(socketId,5);
-                // Extract Cooking Time from Input and pass it to prepareMessage
-                responseMessage=prepareMessage(5,rcpList,recipeCorpus,data.text);
+                if ((data.text == "c") || (data.text == "C")){
+
+                    socketsWorkflowMap.set(socketId,5);
+                    responseMessage = prepareMessage(5,rcpList,recipeCorpus,data.text);
+
+                }
+                else {
+                    socketsWorkflowMap.set(socketId,1);
+                    // Extract Cooking Time from Input and pass it to prepareMessage
+                    responseMessage= recipeCorpus.welcomeMsgRepeat();
+                }
                 return responseMessage;
                 break;
 
@@ -299,14 +333,13 @@ socketIO.on('connection', (socket) => {
                 // Received Complexity Number
                 //Increment Step only if no errors     // Extract Complexity calculation from Input and pass it to prepareMessage
                 responseMessage = prepareMessage(7,rcpList,recipeCorpus,data.text);
-
                 return responseMessage;
                 break;
             case 7:
-                socketsWorkflowMap.set(socketId,8);
-                responseMessage = prepareMessage(8,rcpList,recipeCorpus,data.text);
-                return responseMessage;
-                break;
+              socketsWorkflowMap.set(socketId,8);
+              responseMessage = prepareMessage(8,rcpList,recipeCorpus,data.text);
+              return responseMessage;
+              break;
             case 8:
                 socketsWorkflowMap.set(socketId,9);
                 // Extract ingredients of Recipes
