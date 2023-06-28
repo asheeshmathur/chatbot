@@ -193,7 +193,10 @@
         "appetizer",
         "before meal",
         "appetizer",
-        "for munching"
+        "for munching",
+        "patties",
+        "patty",
+        "petties"
       ],
       "answer": {
         "returns": "recipeName",
@@ -211,7 +214,8 @@
         "diabetic friendly",
         "diabetic",
         "sugarfree",
-        "diabetes"
+        "diabetes",
+        "pasta"
       ],
       "answer": {
         "returns": "recipeName",

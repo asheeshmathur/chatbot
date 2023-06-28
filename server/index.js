@@ -329,12 +329,21 @@ socketIO.on('connection', (socket) => {
                 return responseMessage;
                 break;
             case 6:
-                socketsWorkflowMap.set(socketId,7);
-                // Received Complexity Number
-                //Increment Step only if no errors     // Extract Complexity calculation from Input and pass it to prepareMessage
-                responseMessage = prepareMessage(7,rcpList,recipeCorpus,data.text);
+                if ((data.text == "c") || (data.text == "C")){
+
+                    socketsWorkflowMap.set(socketId,1);
+                    responseMessage = recipeCorpus.welcomeMsgRepeat();
+
+                }
+                else {
+                    socketsWorkflowMap.set(socketId,7);
+                    // Extract Cooking Time from Input and pass it to prepareMessage
+//Increment Step only if no errors     // Extract Complexity calculation from Input and pass it to prepareMessage
+                    responseMessage = prepareMessage(7,rcpList,recipeCorpus,data.text);                }
                 return responseMessage;
+
                 break;
+
             case 7:
               socketsWorkflowMap.set(socketId,8);
               responseMessage = prepareMessage(8,rcpList,recipeCorpus,data.text);
