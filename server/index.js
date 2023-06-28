@@ -74,7 +74,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     }
                     if (matchCout == 0)
                     {
-                        message = "No matching Recipe found as per your cooking time. ";
+                        message = "No matching Recipe found as per your cooking time. Try another recipe option by pressing any key to continue exploring other options. Good Luck .. ";
                     }
                 }
             }
