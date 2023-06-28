@@ -9,6 +9,11 @@ const MsgContainer = ({messages, typingStatus, lastMessageRef}) => {
             <header className='Header'>
                 <p>Welcome To Recipe Cornucopia</p>
             </header>
+            <header className='HeaderII'>
+                Special Key Presses in Our Explorations<br/>
+                'q' |'Q'  : Unable to Find Matching Recipes of Choice<br/>
+                'c' | 'C' : Continue Journey ...
+            </header>
 
 
             <div className='container'>

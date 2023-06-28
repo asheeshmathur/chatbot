@@ -48,7 +48,7 @@ const MsgPage = () => {
 
     <div className="chat">
 
-      <div className='chat__main'>
+      <div className='mainchat'>
         <MsgContainer messages={messages} typingStatus={typingStatus} lastMessageRef={lastMessageRef}/>
         <MsgSender socket={socket}/>
       </div>

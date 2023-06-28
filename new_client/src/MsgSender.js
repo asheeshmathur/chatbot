@@ -41,7 +41,7 @@ const MsgSender = ({socket}) => {
 
     }
   return (
-    <div className='chat__footer'>
+    <div className='send_msg'>
         <form className='form' onSubmit={handleSendMessage}>
           <input 
             type="text" 
@@ -51,7 +51,7 @@ const MsgSender = ({socket}) => {
             onChange={e => setMessage(e.target.value)}
             onKeyDown={handleTyping}
             />
-            <button className="sendBtn">SEND</button>
+            <button className="sendMsgBtn">SEND</button>
         </form>
      </div>
   )
