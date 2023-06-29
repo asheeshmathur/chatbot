@@ -75,7 +75,8 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     if (matchCout == 0)
                     {
                         message =
-                            "No matching Recipe found as per your cooking time. Try another recipe option by pressing 'q' or 'Q',  to continue exploring other options. Good Luck .. ";
+                            "No matching Recipe found as per your cooking time." +
+                            "Please enter another Time or Try another recipes by pressing 'q' or 'Q'. Good Luck .. ";
                     }
                 }
             }
@@ -125,7 +126,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                     // Add from list
                     message = message + " |  " + ingredientList[i]["ingredient"]["ingredientName"];
                 }
-                message=message+continueMsg;
+                message=message+"Press 'q' or 'Q' to explore other items or Any Key to Proceed Further";
             }
             break;
         case 9:
@@ -135,7 +136,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
                 message = workflowStep + " | " + "This recipe is for  : " + map.get("servings");
                 message = message +
-                    ` Servings, Would you like to view it's Proportion Value & Unit of ingredients. Press C to view`;
+                    ` Servings, Would you like to view it's Proportion Value & Unit of ingredients. Press 'c' or 'C' to view`;
             }
             break;
         case 10:
@@ -188,21 +189,21 @@ socketIO.on('connection', (socket) => {
     // Manage the Steps of Conversations
 
     let respondBack = false;
-    let triggerResponse= false;
+    let triggerResponse = false;
     let noMatchFlag = false;
-    let showStaticMessage= false;
+    let showStaticMessage = false;
     let isError = false
 
     console.log(`⚡: ${socket.id} user just connected!`)
     // Add user/socket in list
-    socketsWorkflowMap.set(socket.id,1);
+    socketsWorkflowMap.set(socket.id, 1);
 
     // Welcome Message on establishing connection
     // Start workflowStep
     workflowStep = 1;
 
     socketIO.emit("messageResponse", {
-        text: workflowStep+" | "+recipeCorpus.welcomeMsg(),
+        text: workflowStep + " | " + recipeCorpus.welcomeMsg(),
         name: "AI Agent",
         id: Math.random(),
         socketID: socketIO.id
@@ -223,155 +224,157 @@ socketIO.on('connection', (socket) => {
     }); //message display
 
     // Function to Manage Workflow
-    function processWorkFlow(socketsWorkflowMap,socketId,data){
+    function processWorkFlow(socketsWorkflowMap, socketId, data) {
         let recipeList = []
         // Workflow of the Chatbot
-        workflowStep= socketsWorkflowMap.get(socketId);
-        switch(workflowStep){
+        workflowStep = socketsWorkflowMap.get(socketId);
+        switch (workflowStep) {
 
             case 1:
                 let intentMap = new Map();
-                let recipes="";
+                let recipes = "";
                 intentMap = intentCorpus.extractIntentsFromText(data.text);
                 recipes = "";
-                if (intentMap.size > 0){
+                if (intentMap.size > 0) {
                     //Increment Step only if no errors
-                    socketsWorkflowMap.set(socketId,2);
-                    workflowStep=workflowStep+1;
+                    socketsWorkflowMap.set(socketId, 2);
+                    workflowStep = workflowStep + 1;
 
-                    recipes = workflowStep+" | "+"We have identified following Recipes  ";
-                    let j =1;
+                    recipes = workflowStep + " | " + "We have identified following Recipes  ";
+                    let j = 1;
                     for (let key of intentMap.keys()) {
                         // Get Flags associated with these recipes
                         let rcpArray = (intentCorpus.intentRecipies.get(key));
                         rcpList = rcpArray;
-                        recipes=recipes +" " +rcpArray;
+                        recipes = recipes + " " + rcpArray;
                     }
-                    recipes=recipes+" Press 'c/C' to continue & if you do not want to  cook this and explore other options Press 'q/Q' . "
+                    recipes = recipes + " Press 'c/C' to continue & if you do not want to  cook this and explore other options Press 'q/Q' . "
 
-                }
-                else{
-                    socketsWorkflowMap.set(socketId,1);
+                } else {
+                    socketsWorkflowMap.set(socketId, 1);
                     workflowStep = 1;
                     recipes = "No Matching Recipe found, Try other Options ";
                     isError = true;
                 }
                 responseMessage = recipes;
                 return responseMessage;
-                showStaticMessage=true;
+                showStaticMessage = true;
                 break;
 
             case 2:
                 // Display StaticMessage as per workflow step
                 // Increment W/F Step
-                if((data.text=="c") || (data.text=="C")){
-                    socketsWorkflowMap.set(socketId,3);
-                    responseMessage =  prepareMessage(3,rcpList,recipeCorpus,"");
+                if ((data.text == "c") || (data.text == "C")) {
+                    socketsWorkflowMap.set(socketId, 3);
+                    responseMessage = prepareMessage(3, rcpList, recipeCorpus, "");
 
-                }
-                else   if((data.text=="q") || (data.text=="Q")){
-                    socketsWorkflowMap.set(socketId,1);
-                    responseMessage =  workflowStep+" | "+recipeCorpus.welcomeMsgRepeat();
-                }
-                else{
+                } else if ((data.text == "q") || (data.text == "Q")) {
+                    socketsWorkflowMap.set(socketId, 1);
+                    responseMessage = workflowStep + " | " + recipeCorpus.welcomeMsgRepeat();
+                } else {
                     responseMessage = "Wrong Choice, Please try again";
-                    socketsWorkflowMap.set(socketId,2);
+                    socketsWorkflowMap.set(socketId, 2);
                 }
                 return responseMessage;
             case 3:
                 //Increment Step only if no errors
-                if (isNaN(data.text)){
-                    socketsWorkflowMap.set(socketId,3);
+                if (isNaN(data.text)) {
+                    socketsWorkflowMap.set(socketId, 3);
                     responseMessage = "Enter Valid Numeric Values";
                     isError = true;
-                }
-                else {
+                } else {
                     //processing time input received
                     // Complex  Call for processing
-                    socketsWorkflowMap.set(socketId,4);
+                    socketsWorkflowMap.set(socketId, 4);
                     // Extract Cooking Time from Input and pass it to prepareMessage
-                    responseMessage=prepareMessage(4,rcpList,recipeCorpus,data.text);
+                    responseMessage = prepareMessage(4, rcpList, recipeCorpus, data.text);
                 }
                 return responseMessage;
 
             case 4:
                 // Complex  Call for processing
-                if ((data.text == "q") || (data.text == "Q")){
-                    socketsWorkflowMap.set(socketId,1);
+                if ((data.text == "q") || (data.text == "Q")) {
+                    socketsWorkflowMap.set(socketId, 1);
                     // Extract Cooking Time from Input and pass it to prepareMessage
-                    responseMessage= recipeCorpus.welcomeMsgRepeat();
+                    responseMessage = recipeCorpus.welcomeMsgRepeat();
 
-                }
-                else {
-                    socketsWorkflowMap.set(socketId,5);
-                    responseMessage = prepareMessage(5,rcpList,recipeCorpus,data.text);
+                } else {
+                    socketsWorkflowMap.set(socketId, 5);
+                    responseMessage = prepareMessage(5, rcpList, recipeCorpus, data.text);
 
                 }
                 return responseMessage;
             case 5:
                 // Received Complexity Number
                 //Increment Step only if no errors
-                if (isNaN(data.text) ){
-                    socketsWorkflowMap.set(socketId,5);
+                if (isNaN(data.text)) {
+                    socketsWorkflowMap.set(socketId, 5);
                     responseMessage = "Not Valid Numeric [1-3] Value";
                     isError = true;
-                }
-                else{
-                    socketsWorkflowMap.set(socketId,6);
+                } else {
+                    socketsWorkflowMap.set(socketId, 6);
                     // Extract Complexity calculation from Input and pass it to prepareMessage
-                    responseMessage = prepareMessage(6,rcpList,recipeCorpus,data.text);
+                    responseMessage = prepareMessage(6, rcpList, recipeCorpus, data.text);
                 }
                 return responseMessage;
             case 6:
-                if ((data.text == 'q') ||(data.text == 'Q')){
-                    socketsWorkflowMap.set(socketId,1);
+                if ((data.text == 'q') || (data.text == 'Q')) {
+                    socketsWorkflowMap.set(socketId, 1);
                     // Extract Cooking Time from Input and pass it to prepareMessage
                     responseMessage = recipeCorpus.welcomeMsgRepeat();
 
-                }
-                else{
-                    socketsWorkflowMap.set(socketId,7);
-                    responseMessage = prepareMessage(7,rcpList,recipeCorpus,data.text);
+                } else {
+                    socketsWorkflowMap.set(socketId, 7);
+                    responseMessage = prepareMessage(7, rcpList, recipeCorpus, data.text);
                 }
 
                 return responseMessage;
 
             case 7:
-                socketsWorkflowMap.set(socketId,8);
-                responseMessage = prepareMessage(8,rcpList,recipeCorpus,data.text);
+                socketsWorkflowMap.set(socketId, 8);
+                responseMessage = prepareMessage(8, rcpList, recipeCorpus, data.text);
                 return responseMessage;
             case 8:
-                socketsWorkflowMap.set(socketId,9);
-                // Extract ingredients of Recipes
-                responseMessage = prepareMessage(9,rcpList,recipeCorpus,data.text);
+                if ((data.text=='q')||(data.text == 'Q'))
+                {
+                    socketsWorkflowMap.set(socketId, 1);
+                    recipeCorpus.welcomeMsgRepeat();
+                }
+                else{
+                    socketsWorkflowMap.set(socketId, 9);
+                    // Extract ingredients of Recipes
+                    responseMessage = prepareMessage(9, rcpList, recipeCorpus, data.text);
+
+                }
                 return responseMessage;
             case 9:
-                socketsWorkflowMap.set(socketId,10);
+                socketsWorkflowMap.set(socketId, 10);
                 // Extract ingredients of Recipes with Portions & Units
-                responseMessage = prepareMessage(10,rcpList,recipeCorpus,data.text);
+                responseMessage = prepareMessage(10, rcpList, recipeCorpus, data.text);
                 return responseMessage;
             case 10:
-                socketsWorkflowMap.set(socketId,11);
+                socketsWorkflowMap.set(socketId, 11);
                 // Extract Recipes
-                responseMessage = prepareMessage(11,rcpList,recipeCorpus,data.text);
+                responseMessage = prepareMessage(11, rcpList, recipeCorpus, data.text);
                 return responseMessage;
 
             case 11:
-                socketsWorkflowMap.set(socketId,12);
-                responseMessage = prepareMessage(12,rcpList,recipeCorpus,data.text);
+                socketsWorkflowMap.set(socketId, 12);
+                responseMessage = prepareMessage(12, rcpList, recipeCorpus, data.text);
                 return responseMessage;
 
             case 12:
-                socketsWorkflowMap.set(socketId,1);
+                socketsWorkflowMap.set(socketId, 1);
                 // Extract Recipes
-                responseMessage = prepareMessage(1,rcpList,recipeCorpus,data.text);
+                responseMessage = prepareMessage(1, rcpList, recipeCorpus, data.text);
                 return responseMessage;
-         }// Switch End
+        }// Switch End
     }
+
     socket.on("message", data => {
         let replyto = socket.id;
         // Message to be displayed
-        responseMessage=processWorkFlow(socketsWorkflowMap,replyto,data);
+        responseMessage = processWorkFlow(socketsWorkflowMap, replyto, data);
         socketIO.to(replyto).emit("messageResponse", {
             text: responseMessage,
             name: "AI Agent",
@@ -379,19 +382,16 @@ socketIO.on('connection', (socket) => {
             socketID: data.socketID
         })
 
-
-
     }); //W/F Message display
-
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
-
         //Remove logged in UserQA/c
         socketsWorkflowMap.delete(socket.id);
         //Removing disconnecting socket record
         socket.disconnect()
     });
 })
+
 
 http.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
