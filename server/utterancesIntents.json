@@ -8,11 +8,16 @@
       "intent": "vegetarian-food",
       "keywords": [
         "vegetarian",
-        "without meat",
-        "without red meat",
+        "vegetables",
         "veg",
-        "no meat",
-        "Vegetarean"
+        "soup",
+        "grill",
+        "grilled",
+        "cabbage",
+        "fruits",
+        "kabobs",
+        "kababa"
+
       ],
       "answer": {
         "returns": "recipeName",
@@ -24,22 +29,21 @@
   ,
     {
       "id": 2,
-      "recipeNames":["Vegetarian Moussaka","Easy Tuna Patties"],
+      "recipeNames":["Vegetarian Moussaka"],
       "intent": "Moussaka",
       "keywords": [
         "easy",
-        "less efforts",
-        "less time",
+        "less",
+        "time",
         "quick",
-        "red",
-        "in half an hour",
-        "in 20 minutes",
-        "everyday"
+        "everyday",
+        "moussaka",
+        "mousaka"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "difficulty": "EASY", "cookingTime": "20", "recipeCategory": "EVERYDAY_COOKING"
+          "difficulty": "EASY", "cookingTime": "120", "recipeCategory": "WORLD_CUISINE"
         }
       }
     }
@@ -51,7 +55,10 @@
       "keywords": [
         "fancy",
         "elegant",
-        "gourmet"
+        "gourmet",
+        "rissoto",
+        "risoto"
+
       ],
       "answer": {
         "returns": "recipeName",
@@ -63,12 +70,14 @@
   ,
     {
       "id": 4,
-      "recipeNames":["Gourmet Mushroom Risotto","Chicken Parmesan"],
+      "recipeNames":["Gourmet Mushroom Risotto"],
       "intent": "red-meat-free",
       "keywords": [
-        "without beef",
-        "without red meat",
-        "no red meat",
+        "gourmet",
+        "mushroom",
+        "risotto",
+        "vegetabels",
+        "vegetabel",
         "vegetarian",
         "vegetarean"
       ],
@@ -88,17 +97,18 @@
         "breakfast",
         "morning",
         "brunch",
-        "early lunch",
+        "early",
+        "lunch",
         "dessert",
-        "something sweet",
         "sweet",
         "sugary",
-        "crepes"
+        "crepes",
+        "sugar"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "BREAKFAST_AND_BRUNCH"
+          "recipeCategory": "BREAKFAST_AND_BRUNCH", "difficulty": "MODERATE", "cookingTime": "20"
         }
       }
     }
@@ -111,14 +121,16 @@
       "keywords": [
         "scallops",
         "seafood",
+        "ocean",
+        "delecacies",
         "pescatarian",
-        "from the sea",
-        "ocean delicacies"
+        "sea",
+        "garlic"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "SEAFOOD"
+          "recipeCategory": "SEAFOOD", "difficulty": "EASY", "cookingTime": "30"
         }
       }
     }
@@ -129,17 +141,18 @@
       "intent": "healthy-dish",
       "keywords": [
         "healthy",
-        "less fat",
+        "less",
         "diet",
-        "fat free",
-        "very healthy",
+        "fatfree",
+        "very",
         "hearty",
-        "soup"
+        "soup",
+        "vegetarian"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeName": "Cabbage Fat-Burning Soup"
+          "recipeName": "Cabbage Fat-Burning Soup", "difficulty": "MODERATE", "cookingTime": "45"
         }
       }
     }
@@ -150,12 +163,13 @@
       "intent": "salad",
       "keywords": [
         "salad",
-        "classic"
+        "classic",
+        "macaroni"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "SALAD"
+          "recipeCategory": "SALAD", "difficulty": "Easy", "cookingTime": "30"
         }
       }
     }
@@ -171,13 +185,13 @@
         "cocktail",
         "alcohol",
         "martini",
-        "Vodka",
+        "vodka",
         "glutenh"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "DRINKS"
+          "recipeCategory": "DRINKS", "difficulty": "EASY", "cookingTime": "5"
         }
       }
     }
@@ -189,19 +203,22 @@
       "keywords": [
         "easy",
         "snack",
-        "quick bite",
+        "bite",
+        "quick",
         "appetizer",
         "before meal",
         "appetizer",
         "for munching",
         "patties",
         "patty",
-        "petties"
+        "sea food",
+        "fish",
+        "seafood"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "APPETIZER_AND_SNACK"
+          "recipeCategory": "APPETIZER_AND_SNACK", "difficulty": "EASY", "cookingTime": "35"
         }
       }
     }
@@ -211,18 +228,117 @@
       "recipeNames": ["Diabetic-Friendly Pork Stroganoff"],
       "intent": "Diabetic-Friendly",
       "keywords": [
-        "diabetic friendly",
+        "friendly",
         "diabetic",
         "sugarfree",
         "diabetes",
-        "pasta"
+        "pasta",
+        "pork"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "APPETIZER_AND_SNACK"
+          "recipeCategory": "APPETIZER_AND_SNACK", "difficulty": "MODERATE", "cookingTime": "50"
+        }
+      }
+    }
+  ,
+    {
+      "id": 12,
+      "recipeNames": ["Paleo and vegan Sunflower Banana Muffins"],
+      "intent": "vegan",
+      "keywords": [
+        "vegan",
+        "dessert",
+        "sweet",
+        "healthy",
+        "eggless",
+        "muffin",
+        "banana"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "BREAD", "difficulty": "HARD", "cookingTime": "25"
+        }
+      }
+    }
+  ,
+    {
+      "id": 13,
+      "recipeNames": ["Churros"],
+      "intent": "dessert",
+      "keywords": [
+        "sweet",
+        "dessert",
+        "fried",
+        "unhealthy",
+        "bite",
+        "quick"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "EVERYDAY_COOKING", "difficulty": "MODERATE", "cookingTime": "20"
+        }
+      }
+    }
+  ,
+    {
+      "id": 14,
+      "recipeNames": ["Basic Mashed Potatoes"],
+      "intent": "GLUTEN_FREE",
+      "keywords": [
+        "gluten-free",
+        "gluten",
+        "free",
+        "easy",
+        "potatoes",
+        "quick",
+        "side"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "SIDE_DISH", "difficulty": "EASY", "cookingTime": "35"
+        }
+      }
+    }
+  ,
+    {
+      "id": 15,
+      "recipeNames": ["Creamy Lemon Chicken Thighs"],
+      "intent": "meat and Poultry",
+      "keywords": [
+        "chicken",
+        "meat",
+        "creamy"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "Meat and Poultry", "difficulty": "MODERATE", "cookingTime": "55"
+        }
+      }
+    }
+  ,
+    {
+      "id": 16,
+      "recipeNames": ["Chicken Parmesan"],
+      "intent": "WORLD_CUISINE",
+      "keywords": [
+        "chicken",
+        "meat",
+        "creamy",
+        "cheesy"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "WORLD_CUISINE", "difficulty": "HARD", "cookingTime": "45"
         }
       }
     }
   ]
 }
+
