@@ -1,3 +1,6 @@
+/**
+ * Parses utterances.json, converts to objects and offers APIs for use by Main Application. This is a singleton
+ */
 var fs = require('fs');
 class IntentCorpus {
 
@@ -118,9 +121,12 @@ class IntentCorpus {
             for (let [key, value] of this.intentKeywords) {
 
                 for (let j = 0; j < value.length; j++) {
+                    /*
                     if(value[j] == "red"){
                         console.log("Data has Red");
                     }
+
+                     */
 
                     if (value[j].includes(tokenizedText[i])){
                         foundCount++;

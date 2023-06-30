@@ -8,16 +8,7 @@
       "intent": "vegetarian-food",
       "keywords": [
         "vegetarian",
-        "vegetables",
-        "veg",
-        "soup",
-        "grill",
-        "grilled",
-        "cabbage",
-        "fruits",
-        "kabobs",
-        "kababa"
-
+        "veg"
       ],
       "answer": {
         "returns": "recipeName",
@@ -32,13 +23,9 @@
       "recipeNames":["Vegetarian Moussaka"],
       "intent": "Moussaka",
       "keywords": [
-        "easy",
-        "less",
-        "time",
-        "quick",
-        "everyday",
-        "moussaka",
-        "mousaka"
+        "vegetarian",
+        "veg",
+        "everyday"
       ],
       "answer": {
         "returns": "recipeName",
@@ -56,9 +43,8 @@
         "fancy",
         "elegant",
         "gourmet",
-        "rissoto",
-        "risoto"
-
+        "vegetarian",
+        "veg"
       ],
       "answer": {
         "returns": "recipeName",
@@ -74,12 +60,11 @@
       "intent": "red-meat-free",
       "keywords": [
         "gourmet",
-        "mushroom",
-        "risotto",
-        "vegetabels",
-        "vegetabel",
         "vegetarian",
-        "vegetarean"
+        "vegetarean",
+        "Mushroom",
+        "Risotto",
+        "veg"
       ],
       "answer": {
         "returns": "recipeName",
@@ -94,16 +79,10 @@
       "recipeNames":["Dessert Crepes"],
       "intent": "breakfast-brunch",
       "keywords": [
-        "breakfast",
-        "morning",
-        "brunch",
-        "early",
-        "lunch",
         "dessert",
         "sweet",
         "sugary",
-        "crepes",
-        "sugar"
+        "crepes"
       ],
       "answer": {
         "returns": "recipeName",
@@ -121,11 +100,10 @@
       "keywords": [
         "scallops",
         "seafood",
-        "ocean",
-        "delecacies",
         "pescatarian",
+        "garlic",
         "sea",
-        "garlic"
+        "ocean"
       ],
       "answer": {
         "returns": "recipeName",
@@ -142,9 +120,8 @@
       "keywords": [
         "healthy",
         "less",
+        "veg",
         "diet",
-        "fatfree",
-        "very",
         "hearty",
         "soup",
         "vegetarian"
@@ -164,7 +141,9 @@
       "keywords": [
         "salad",
         "classic",
-        "macaroni"
+        "pasta",
+        "vegetarian",
+        "veg"
       ],
       "answer": {
         "returns": "recipeName",
@@ -185,7 +164,7 @@
         "cocktail",
         "alcohol",
         "martini",
-        "vodka",
+        "Vodka",
         "glutenh"
       ],
       "answer": {
@@ -198,27 +177,23 @@
   ,
     {
       "id": 10,
-      "recipeNames":["Easy Tuna Patties"],
+      "recipeNames":["Easy Tuna Patties","Seafood Pasta","Easy Garlic-Lemon Scallops"],
       "intent": "appetizer-snack",
       "keywords": [
         "easy",
         "snack",
-        "bite",
-        "quick",
-        "appetizer",
-        "before meal",
-        "appetizer",
-        "for munching",
         "patties",
         "patty",
-        "sea food",
+        "sea-food",
         "fish",
+        "sea",
+        "food",
         "seafood"
       ],
       "answer": {
         "returns": "recipeName",
         "query":{
-          "recipeCategory": "APPETIZER_AND_SNACK", "difficulty": "EASY", "cookingTime": "35"
+          "recipeCategory": "APPETIZER_AND_SNACK", "difficulty": "EASY", "cookingTime": "30"
         }
       }
     }
@@ -233,6 +208,7 @@
         "sugarfree",
         "diabetes",
         "pasta",
+        "meat",
         "pork"
       ],
       "answer": {
@@ -245,16 +221,15 @@
   ,
     {
       "id": 12,
-      "recipeNames": ["Paleo and vegan Sunflower Banana Muffins"],
+      "recipeNames": ["Paleo and Vegan Sunflower Banana Muffins"],
       "intent": "vegan",
       "keywords": [
         "vegan",
         "dessert",
+        "desserts",
         "sweet",
         "healthy",
-        "eggless",
-        "muffin",
-        "banana"
+        "eggless"
       ],
       "answer": {
         "returns": "recipeName",
@@ -273,7 +248,6 @@
         "dessert",
         "fried",
         "unhealthy",
-        "bite",
         "quick"
       ],
       "answer": {
@@ -289,13 +263,12 @@
       "recipeNames": ["Basic Mashed Potatoes"],
       "intent": "GLUTEN_FREE",
       "keywords": [
-        "gluten-free",
         "gluten",
-        "free",
+        "without",
         "easy",
         "potatoes",
         "quick",
-        "side"
+        "dish"
       ],
       "answer": {
         "returns": "recipeName",
@@ -307,12 +280,14 @@
   ,
     {
       "id": 15,
-      "recipeNames": ["Creamy Lemon Chicken Thighs"],
+      "recipeNames": ["Creamy Lemon Chicken Thighs","Chicken Parmesan","Diabetic-Friendly Pork Stroganoff"],
       "intent": "meat and Poultry",
       "keywords": [
         "chicken",
         "meat",
-        "creamy"
+        "creamy",
+        "lemon",
+        "parmesan"
       ],
       "answer": {
         "returns": "recipeName",
@@ -331,6 +306,7 @@
         "meat",
         "creamy",
         "cheesy"
+
       ],
       "answer": {
         "returns": "recipeName",
@@ -338,7 +314,88 @@
           "recipeCategory": "WORLD_CUISINE", "difficulty": "HARD", "cookingTime": "45"
         }
       }
+    },
+    {
+      "id": 17,
+      "recipeNames": ["Beef and Broccoli"],
+      "intent": "MEAT",
+      "keywords": [
+        "beef",
+        "meat",
+        "easy",
+        "red-meat"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "MEAT", "difficulty": "EASY", "cookingTime": "20"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "recipeNames": ["Vanilla Cake"],
+      "intent": "DESSERT",
+      "keywords": [
+        "sweet",
+        "dessert"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "DESSERT", "difficulty": "MODERATE", "cookingTime": "50"
+        }
+      }
+    },
+    {
+      "id": 19,
+      "recipeNames": ["Tangy Vegan Pad Thai"],
+      "intent": "VEGAN",
+      "keywords": [
+        "vegan",
+        "tangy",
+        "pasta"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "VEGAN", "difficulty": "MODERATE", "cookingTime": "40"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "recipeNames": ["Creamy Vegan Potato Leek Soup"],
+      "intent": "VEGAN_SOUP",
+      "keywords": [
+        "vegan",
+        "creamy",
+        "soup"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "VEGAN_SOUP", "difficulty": "EASY", "cookingTime": "30"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "recipeNames": ["Seafood Pasta"],
+      "intent": "SEAFOOD",
+      "keywords": [
+        "seafood",
+        "sea",
+        "food",
+        "shrimps",
+        "soup"
+      ],
+      "answer": {
+        "returns": "recipeName",
+        "query":{
+          "recipeCategory": "SEAFOOD", "difficulty": "EASY", "cookingTime": "20"
+        }
+      }
     }
   ]
 }
-

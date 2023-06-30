@@ -102,9 +102,15 @@ class RecipeCorpus {
     welcomeMsg(){
 
         return "Welcome to the World of Yummy Recipes. " +
-            "Are you in the mood to explore Vegetarian, Non " +
-            "Vegetarian, Vegan , Breakfast, Gluten & Meat Free, World Cuisine, Diabetic Friendly, Pasta, Noodles, Appetizer, Snacks, Drinks, Salad, Sea Food, Poultry ,Brunch and much more. Please tell us your choice to start your journey " ;
+            "Are you in the mood to explore Vegetarian, "+
+            "Vegan , Breakfast, Petties, Gluten Free, World Cuisine, Diabetic Friendly, Pasta, Noodles, Appetizer, Snacks, Drinks, Salad, Sea Food, Poultry ,Brunch and much more. Please tell us your choice to start your journey " ;
 
+    }
+
+    welcomeMsgRepeat(){
+
+        return "Could Not Find Matching Recipes as per your Criteria, No Worries Explore Vegetarian " +
+            "Vegan , Breakfast, Petties, Gluten Free, World Cuisine, Diabetic Friendly, Pasta, Noodles, Appetizer, Snacks, Drinks, Salad, Sea Food, Poultry ,Brunch and much more. Please tell us your choice to start your journey " ;
 
     }
 

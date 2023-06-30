@@ -1,3 +1,12 @@
+/**
+ * Main backend component. Handles all requests, like connection/Disconnect
+ * Integrates with both Recipe corpus - Data.json and Intent/Keyword spotting
+ * based on keywords,
+ * User input is directly passed to two corpus for parsing, normalization,removal of stop
+ * words, case change, Tokenization, Normalization, Removal of Stop Words.
+ * These tokens are then matched with keywords. Number of hits raises the score,
+ * @type {{hostname(): string, getPriority(pid?: number): number, EOL: string, version(): string, UserInfo: UserInfo, NetworkInterfaceInfoIPv4: NetworkInterfaceInfoIPv4, CpuInfo: CpuInfo, arch(): string, platform(): NodeJS.Platform, networkInterfaces(): NodeJS.Dict<NetworkInterfaceInfo[]>, tmpdir(): string, freemem(): number, cpus(): CpuInfo[], SignalConstants: SignalConstants, uptime(): number, setPriority: {(priority: number): void, (pid: number, priority: number): void}, homedir(): string, NetworkInterfaceInfoIPv6: NetworkInterfaceInfoIPv6, constants: constants, totalmem(): number, release(): string, NetworkInterfaceInfo: NetworkInterfaceInfoIPv4 | NetworkInterfaceInfoIPv6, NetworkInterfaceBase: NetworkInterfaceBase, userInfo: {(options: {encoding: "buffer"}): UserInfo<Buffer>, (options?: {encoding: BufferEncoding}): UserInfo<string>}, devNull: string, loadavg(): number[], endianness(): ("BE" | "LE"), type(): string} | {hostname(): string, getPriority(pid?: number): number, availableParallelism(): number, EOL: string, version(): string, machine(): string, UserInfo: UserInfo, NetworkInterfaceInfoIPv4: NetworkInterfaceInfoIPv4, CpuInfo: CpuInfo, arch(): string, platform(): NodeJS.Platform, networkInterfaces(): NodeJS.Dict<NetworkInterfaceInfo[]>, tmpdir(): string, freemem(): number, cpus(): CpuInfo[], SignalConstants: SignalConstants, uptime(): number, setPriority: {(priority: number): void, (pid: number, priority: number): void}, homedir(): string, NetworkInterfaceInfoIPv6: NetworkInterfaceInfoIPv6, constants: constants, totalmem(): number, release(): string, NetworkInterfaceInfo: NetworkInterfaceInfoIPv4 | NetworkInterfaceInfoIPv6, NetworkInterfaceBase: NetworkInterfaceBase, userInfo: {(options: {encoding: "buffer"}): UserInfo<Buffer>, (options?: {encoding: BufferEncoding}): UserInfo<string>}, devNull: string, loadavg(): number[], endianness(): ("BE" | "LE"), type(): string} | {hostname(): string, getPriority(pid?: number): number, availableParallelism(): number, EOL: string, version(): string, machine(): string, UserInfo: UserInfo, NetworkInterfaceInfoIPv4: NetworkInterfaceInfoIPv4, CpuInfo: CpuInfo, arch(): string, platform(): NodeJS.Platform, networkInterfaces(): NodeJS.Dict<NetworkInterfaceInfo[]>, tmpdir(): string, freemem(): number, cpus(): CpuInfo[], SignalConstants: SignalConstants, uptime(): number, setPriority: {(priority: number): void, (pid: number, priority: number): void}, homedir(): string, NetworkInterfaceInfoIPv6: NetworkInterfaceInfoIPv6, constants: constants, totalmem(): number, release(): string, NetworkInterfaceInfo: NetworkInterfaceInfoIPv4 | NetworkInterfaceInfoIPv6, NetworkInterfaceBase: NetworkInterfaceBase, userInfo: {(options: {encoding: "buffer"}): UserInfo<Buffer>, (options?: {encoding: BufferEncoding}): UserInfo<string>}, devNull: string, loadavg(): number[], endianness(): ("BE" | "LE"), type(): string}}
+ */
 var os = require('os');
 const express = require("express")
 const app = express()
@@ -40,7 +49,7 @@ let rcpList="";
 // All messages should be externalised in json file
 function prepareMessage(workflowStep,recpList, rCorpus,addData ){
     let message="";
-    let continueMsg = "  Enter 'c/C' or any key in text box below to continue";
+    let continueMsg = "  .Press any key to continue";
     let relevantRecipeList =[]
     switch (workflowStep) {
         case 1:
@@ -50,7 +59,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
 
         case 3:
             // Message to receive  on cooking time
-            message = workflowStep + " | " + "Good, how much cooking time (in minutes) you have in mind in Minutes ? Please enter a Number Only ";
+            message = workflowStep + " | " + "Good choice, how much cooking time (in minutes) you have in mind? Please enter a Number Only ";
             break;
 
         case 4:
@@ -63,27 +72,38 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             if(recpList.length >0){
                 for (let i = 0; i < recpList.length; i++) {
                     let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
-                    let j =i+1
-                    extractedCkTime = map.get("prepTime") + map.get("cookingTime");
-                    if (extractedCkTime <= addData) {
-                        message = message +" "+j+" . "+ map.get("recipeName");
-                        relevantRecipeList.push(map.get("recipeName"));
-                        matchCout = matchCout+1;
-                        message = message+continueMsg;
+                    if (map == null){
+                        message ="No Match ...some error"
+                    }
+                    else{
+                        let j =i+1
+                        extractedCkTime = map.get("prepTime") + map.get("cookingTime");
+                        if (extractedCkTime <= addData) {
+                            message = message +" "+j+" . "+ map.get("recipeName");
+                            relevantRecipeList.push(map.get("recipeName"));
+                            matchCout = matchCout+1;
+                            message = message+continueMsg;
+
+                        }
+                        if (matchCout == 0)
+                        {
+                            recpList=[];
+                            message =
+                                "No Recipes .. as per your Cooking Time(including Preparing Time)." +
+                                "Try another recipes by pressing CAREFULLY ONLY 'q' or 'Q'. Good Luck ... ";
+                        }
 
                     }
-                    if (matchCout == 0)
-                    {
-                        message =
-                            "No matching Recipe found as per your cooking time." +
-                            "Please enter another Time or Try another recipes by pressing 'q' or 'Q'. Good Luck .. ";
-                    }
+
                 }
             }
             break;
         case 5:
-            // Message to enter difficulty Level
-            message = workflowStep + " | " + "Filter recipes based its Difficulty Level. Easy: [1], Moderate:[2] ,Difficult:[3] . Enter corresponding code [Number 1-3]";
+            if(recpList != null){
+                // Message to enter difficulty Level
+                message = workflowStep + " | " + "Filter recipes based on its Difficulty Level. Easy: [1], Moderate:[2] ,Difficult:[3] . Enter corresponding code [Number 1-3]";
+
+            }
             break;
         case 6:
             //Difficulty Level  submitted , filter accordingly [Easy : 1, Moderate:2, Difficult:3]
@@ -112,7 +132,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             break;
         case 7:
             // Meesage to prompt for ingredients
-            message = workflowStep + " | " + "View the ingredients of above Recipe. Enter 'c' or any other key to continue";
+            message = workflowStep + " | " + "View the ingredients of above Recipe"+ continueMsg;
             break;
         case 8:
             // Display Ingredients
@@ -141,7 +161,7 @@ function prepareMessage(workflowStep,recpList, rCorpus,addData ){
             break;
         case 10:
 
-            // Pick recipe Ingrdients with proportions
+            // Pick recipe Ingredients with proportions
             let ingList = [];
             for (let i = 0; i < recpList.length; i++) {
                 let map = recipeCorpus.getRecipeDetailsByName(recpList[i]);
@@ -208,7 +228,7 @@ socketIO.on('connection', (socket) => {
         id: Math.random(),
         socketID: socketIO.id
     })
-    //Reverts message back to chatbot
+    //Reverts message back to chat bot
     socket.on("messageDisplay", data => {
         console.log("Socket to be responded: " + socket.id);
         let replyto = socket.id;
@@ -226,7 +246,7 @@ socketIO.on('connection', (socket) => {
     // Function to Manage Workflow
     function processWorkFlow(socketsWorkflowMap, socketId, data) {
         let recipeList = []
-        // Workflow of the Chatbot
+        // Workflow of the Chat bot
         workflowStep = socketsWorkflowMap.get(socketId);
         switch (workflowStep) {
 
@@ -246,11 +266,22 @@ socketIO.on('connection', (socket) => {
                         // Get Flags associated with these recipes
                         let rcpArray = (intentCorpus.intentRecipies.get(key));
                         rcpList = rcpArray;
-                        recipes = recipes + " " + rcpArray;
-                    }
-                    recipes = recipes + " Press 'c/C' to continue & if you do not want to  cook this and explore other options Press 'q/Q' . "
+                        if(rcpArray.length > 0){
+                            for (let i =0; i<rcpArray.length;i++){
+                                j = i+1;
+                                recipes = recipes +"  , " + rcpArray[i];
+                            }
 
-                } else {
+
+                        }
+
+
+                    }
+
+                    recipes = recipes + " Press 'c/C' to continue & instead explore other options Press 'q/Q' . "
+
+                }
+                else{
                     socketsWorkflowMap.set(socketId, 1);
                     workflowStep = 1;
                     recipes = "No Matching Recipe found, Try other Options ";
@@ -293,7 +324,8 @@ socketIO.on('connection', (socket) => {
 
             case 4:
                 // Complex  Call for processing
-                if ((data.text == "q") || (data.text == "Q")) {
+                if ((data.text == "q") || (data.text == "Q"))
+                {
                     socketsWorkflowMap.set(socketId, 1);
                     // Extract Cooking Time from Input and pass it to prepareMessage
                     responseMessage = recipeCorpus.welcomeMsgRepeat();
@@ -305,17 +337,10 @@ socketIO.on('connection', (socket) => {
                 }
                 return responseMessage;
             case 5:
-                // Received Complexity Number
-                //Increment Step only if no errors
-                if (isNaN(data.text)) {
-                    socketsWorkflowMap.set(socketId, 5);
-                    responseMessage = "Not Valid Numeric [1-3] Value";
-                    isError = true;
-                } else {
-                    socketsWorkflowMap.set(socketId, 6);
-                    // Extract Complexity calculation from Input and pass it to prepareMessage
-                    responseMessage = prepareMessage(6, rcpList, recipeCorpus, data.text);
-                }
+
+                socketsWorkflowMap.set(socketId, 6);
+                // Extract Complexity calculation from Input and pass it to prepareMessage
+                responseMessage = prepareMessage(6, rcpList, recipeCorpus, data.text);
                 return responseMessage;
             case 6:
                 if ((data.text == 'q') || (data.text == 'Q')) {
